@@ -1,18 +1,18 @@
 public class Player {
 
-    private Coordinate position;
+    private Coordinate position = new Coordinate();
     private Engimon activeEngimon;
-    //Inventory<Engimon> *inventoryEngimon;
-    //Inventory<Skill> *inventorySkill;
 
     private Inventory<Engimon> InventEngimon;
     private Inventory<Skill> InventSkill;
     private int maxCapacity = 30;
 
     //Player();
-    public Player(int x, int y){
-        this.position.x = x;
-        this.position.y = y;
+    public Player(Coordinate coor){
+        this.position.x = coor.x;
+        this.position.y = coor.y;
+        this.InventEngimon = new Inventory<Engimon>();
+        this.InventSkill = new Inventory<Skill>();
     }
     //void move(char, Map);
     public void setPosition(Coordinate z){
@@ -36,17 +36,45 @@ public class Player {
 
     }
 
+    /* 
+    #mungkin klo mau nyoba biar ga usah pisah 2
+    public void showInvent(Inventory<T> I) {
+        I.printInventory();
+    }
+    */
     public void showListSkillItem() {
         InventSkill.printInventory();
     }
 
-    public void showListEngimon(){} 
-    public void showDataEngimon(Engimon _engimon){}
+    public void showListEngimon() {
+        InventEngimon.printInventory();
+    }
+
+    public void showDataEngimon(Engimon _engimon){}//Ini bukan displayInfo() di Engimon???
     public void showDataSkillItem(Skill _skill){}
     // public void battle(Engimon *eng1, Engimon eng2, vector<Engimon>* list_enemies){}
     // Return type BuildNewEng diubah biar bisa assign objek aslinya, bukan pointer ke objek itu.
     // public Engimon BuildNewEng(String nama,String species){}
-    // public void breed(Engimon _engimon1, Engimon _engimon2){}
+    public void breed(Engimon _engimon1, Engimon _engimon2, String engimonName) {
+        // Fire/Electric
+        if ((_engimon1.getElements().get(0).equals("Fire") && _engimon2.getElements().get(0).equals("Electric")) || (_engimon1.getElements().get(0).equals("Electric") && _engimon1.getElements().get(0).equals("Fire"))) {
+            Engimon newEng = new Rotom(engimonName, new Coordinate(2,2), 1);
+        }
+        // Water/Ice
+        else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ice")) || (_engimon1.getElements().get(0).equals("Ice") && _engimon1.getElements().get(0).equals("Water"))) {
+            Engimon newEng = new Lapras(engimonName, new Coordinate(2,2), 1);
+        }
+        // Water/Ground
+        else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ground")) || (_engimon1.getElements().get(0).equals("Ground") && _engimon1.getElements().get(0).equals("Water"))) {
+            Engimon newEng = new Wooper(engimonName, new Coordinate(2,2), 1);
+        }
+        // // Fire
+        // else if (){}
+    }
+    public void deleteEngimon(Engimon eng){
+        InventEngimon.removeItem(eng, 1);
+    }
+
     public void addEngimon(Engimon _engimon){
         InventEngimon.addItem(_engimon, 1);
     }

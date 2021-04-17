@@ -13,6 +13,12 @@ class Skill {
         this.Nama = _nama;
     }
 
+    @Override
+    //Ini buat tampilin data yang muncul saat printInventory()
+    public String toString(){
+        return ("Nama: "+ this.getNama() + "\n");
+    }
+
     public Integer getBasePower() {
         return this.BasePower;
     }

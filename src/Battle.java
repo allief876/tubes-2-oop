@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Battle {
 
@@ -6,19 +6,39 @@ public class Battle {
     protected Engimon enemyEngimon;
     protected double powerValueActiveEngimon;
     protected double powerValueEnemyEngimon;
-    public Battle(Engimon eng1, Engimon eng2){
+    protected Player player;
+    protected static int winExp = 50;
+    public Battle(Player _player, Engimon eng1, Engimon eng2){
+        this.player = _player;
         this.activeEngimon = eng1;
         this.enemyEngimon = eng2;
         powerValueActiveEngimon = getPowerValue(activeEngimon, enemyEngimon);
         powerValueEnemyEngimon = getPowerValue(enemyEngimon, activeEngimon);
-        if (powerValueActiveEngimon > powerValueEnemyEngimon){
-            //Menang
-        }
-        else{ //powerValueActiveEngimon < powerValueEnemyEngimon
-            //Kalah
-        }
+        activeEngimon.displayInfo();
+        enemyEngimon.displayInfo();
+        System.out.println("Power Active Engimon: " + powerValueActiveEngimon);
+        System.out.println("Power Enemy: " + powerValueEnemyEngimon);
+        // Print Data engimon musuh
+        // Menerima opsi masukan 
+        Scanner input = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Apakah anda ingin bertarung? (yes/no) ");
+        String option = input.nextLine();  // Read user input
+        if (option.equals("yes")) bertarung();
+        else if (option.equals("no")) System.out.println("Battle dibatalkan.");
+        else System.out.println("Input tidak valid! Battle dibatalkan."); 
     }
 
+    public void bertarung(){
+        if (powerValueActiveEngimon > powerValueEnemyEngimon){
+            System.out.println("Engimon anda menang!");
+            win();
+        }
+        else { //powerValueActiveEngimon < powerValueEnemyEngimon
+            System.out.println("Engimon anda kalah :(");
+            lose();
+        }
+    }
+    
     public int getIdx(String _element)
     {
         int idx; 
@@ -114,7 +134,47 @@ public class Battle {
         double powEngimon1 = (eng1.getLevel() * engVal1) + sumSkill1; //power engimon 1
         return powEngimon1;
     }
-    // public int getIdx(String _element){} //untuk mendapatkan indeks pada tabel advantages values
+
+    public void win(){
+        // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup. 
+        // Active engimon juga akan menerima experience points dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu). 
+        // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
+        
+        if(!player.isInventoryFull()){
+            System.out.println("Engimon musuh menjadi milik anda!");
+            player.addEngimon(enemyEngimon);
+        }
+        if(!player.isInventoryFull()){
+            ArrayList<Skill> enemySkill = enemyEngimon.getSkills(); 
+            player.addSkillItem(enemySkill.get(0));
+            System.out.println("Anda mendapatkan skill musuh!");
+        }  
+        int baseExp = activeEngimon.getExp();
+        activeEngimon.setExp(baseExp+winExp);
+        
+        activeEngimon.setCumExp(activeEngimon.getCumExp() + this.winExp);
+        if (activeEngimon.getExp() > 100){
+            activeEngimon.setExp(activeEngimon.getCumExp()-100);
+            activeEngimon.setLevel(activeEngimon.getLevel()+1);
+            System.out.println("Level Up!");
+        }
+        if (activeEngimon.getCumExp() >= 10000){
+            System.out.println("Engimon  mencapai Exp maximum, Engimon dihapus dari Inventory");
+            player.deleteEngimon(activeEngimon);
+        }
+    }
+
+    public void lose(){
+        // Jika engimon player kalah, engimon player akan kehilangan 1 life. 
+        // Jika life dari engimon mencapai 0, engimon akan mati. 
+        // Kemudian player dapat memilih command selanjutnya seperti biasa.
+        this.activeEngimon.setLive(activeEngimon.getLive()-1);
+        if (activeEngimon.getLive() == 0){
+            //Engimon mati
+            System.out.println("Engimon telah mati, Engimon dihapus dari inventory engimon");
+            player.deleteEngimon(activeEngimon);
+        }
+    }
     // public boolean isInventoryEngimonEmpty(){}
     // public Engimon isEngimonNearby(ArrayList<Engimon> InventEngimon){}
     // public Engimon findEngimon(String _name){}

@@ -68,6 +68,14 @@ abstract class Engimon {
     
     } // tampilin semua data engimon
     
+    @Override
+    //Ini buat tampilin data yang muncul saat printInventory()
+    public String toString(){
+        return ("Nama: "+ this.getName() + 
+                "\n Species: "+ this.getSpecies() + 
+                "\n Level: " +this.getLevel()+"\n");
+    }
+
     //Getter
     public final String getName() {
         return this.Name;

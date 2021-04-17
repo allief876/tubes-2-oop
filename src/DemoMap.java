@@ -18,6 +18,6 @@ public class DemoMap {
         Coordinate pos = new Coordinate();
         int level = 1;
         Engimon E = new Squirtle("Hello, World", pos, 1);
-        E.displayInfo(); // displayInfo lolos tes
+        E.displayInfo(); // displayInfo ???
     }
 }

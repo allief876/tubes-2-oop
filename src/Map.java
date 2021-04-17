@@ -13,14 +13,14 @@ public class Map {
         int row = 20;
         int col = 20;
         PetaAwal = new char[row][col];
-        for(int i = 0; i < row * col ; i++){
-            PetaAwal[i/row][i % col] = '0';
-        }
+        // for(int i = 0; i < row * col ; i++){
+        //     PetaAwal[i/row][i % col] = '0';
+        // }
         // Inisialisasi PetaModifikasi
         PetaModifikasi = new char[row][col];
-        for(int i = 0; i < row * col ; i++){
-            PetaModifikasi[i/row][i % col] = '0';
-        }
+        // for(int i = 0; i < row * col ; i++){
+        //     PetaModifikasi[i/row][i % col] = '0';
+        // }
         try {
             File fileSaya = new File(namafile);
             Scanner myReader = new Scanner(fileSaya);
