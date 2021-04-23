@@ -1,3 +1,5 @@
+package tubes;
+
 public class Player {
 
     private Coordinate position = new Coordinate();

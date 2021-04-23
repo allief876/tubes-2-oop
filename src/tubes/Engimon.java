@@ -1,6 +1,8 @@
+package tubes;
+
 import java.util.*;
 
-abstract class Engimon {
+abstract public class Engimon {
     protected String Name;                          // Nama engimon, default = engimon
     protected Coordinate Position;
     protected String Species;                       //  spesies engimon, default = species
@@ -193,93 +195,5 @@ abstract class Engimon {
             this.setLevel(this.getLevel()+1);
             this.setExp(this.getExp()-100);
         }
-    }
-}
-
-class Charmander extends Engimon{
-    public Charmander(String name, Coordinate pos, int level) {
-        super(name, "Charmander", "Fire", "none", "Ada tubes 3 gak?", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Fire"); element.add("none");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,105,1,"Pyro Ball");
-        this.incSkills(newSkill);
-    }
-}
-
-class Squirtle extends Engimon{
-    public Squirtle(String name, Coordinate pos, int level) {
-        super(name, "Squirtle", "Water", "none", "Plis kasih nilai bagus ya :)", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Water"); element.add("none");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Waterfall");
-        this.incSkills(newSkill);
-    }
-};
-
-class Pikachu extends Engimon {
-    public Pikachu(String name, Coordinate pos, int level) {
-        super(name, "Pikachu", "Electric", "none", "Yuk bisa yuk", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Electric"); element.add("none");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,125,1,"Thunderbolt");
-        this.incSkills(newSkill);
-    }
-}
-
-class Diglett extends Engimon {
-    public Diglett(String name, Coordinate pos, int level) {
-        super(name, "Diglett", "Ground", "none", "Add UID genshin: 821919186", pos, level);
-        ArrayList<String> element = new ArrayList<String>();
-        element.add("Ground"); element.add("none");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,115,1,"Max Quake");
-        this.incSkills(newSkill);
-    }
-}
-
-class Glalie extends Engimon{
-    public Glalie(String name, Coordinate pos, int level) {
-        super(name, "Glalie", "Ice", "none", "Kita doain kakak lulus tepat waktu", pos, level);
-        ArrayList<String> element = new ArrayList<String>();
-        element.add("Ice"); element.add("none");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,90,1,"Freeze Shock");
-        this.incSkills(newSkill);
-    }
-}
-
-class Rotom extends Engimon{
-    public Rotom(String name, Coordinate pos, int level) {
-        super(name, "Rotom", "Fire", "Electric", "Siap begadang demi tubes", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Fire"); element.add("Electric");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Overloaded");
-        this.incSkills(newSkill);
-    }
-}
-
-class Lapras extends Engimon{
-    public Lapras(String name, Coordinate pos, int level) {
-        super(name, "Lapras", "Water", "Ice", "Duar lulus (amin)", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Water"); element.add("Ice");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Frozen");
-        this.incSkills(newSkill);
-    }
-}
-
-class Wooper extends Engimon {
-    public Wooper(String name, Coordinate pos, int level) {
-        super(name, "Wooper", "Water", "Ground", "Kapan libur...", pos, level);
-        ArrayList<String> element =  new ArrayList<String>();
-        element.add("Water"); element.add("Ground");
-        Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Crystalize");
-        this.incSkills(newSkill);
     }
 }

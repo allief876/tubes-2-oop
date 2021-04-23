@@ -1,4 +1,8 @@
-import java.util.Scanner;  // Import the Scanner class
+import tubes.*;
+import tubes.Map;
+
+import java.util.*;  // Import the Scanner class
+
 
 public class Main {
 
@@ -169,7 +173,7 @@ public class Main {
     
         // GAME ASLI (TERMASUK PETA)
         bool isGameRunning = true;
-        Map M = new Map("inputPeta.txt", 0, 5, 14, 19);
+        tubes.Map M = new Map("tubes/inputPeta.txt", 0, 5, 14, 19);
         String command;
         String command2;
         int turn = 1;

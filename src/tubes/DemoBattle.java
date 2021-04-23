@@ -1,3 +1,5 @@
+package tubes;
+
 public class DemoBattle {
     public static void main (String[] args) {
         Coordinate pos1 = new Coordinate(1,1);

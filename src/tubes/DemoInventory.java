@@ -1,3 +1,5 @@
+package tubes;
+
 import java.util.*;
 
 public class DemoInventory {

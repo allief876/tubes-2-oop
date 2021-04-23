@@ -1,6 +1,6 @@
 // Unit testing Coordinate.java
 
-package testing;
+package tubes;
 import static org.junit.Assert.*;
 
 class CoordinateTest

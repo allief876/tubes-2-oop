@@ -1,3 +1,5 @@
+package tubes;
+
 public class Coordinate {
     public Integer x;
     public Integer y;

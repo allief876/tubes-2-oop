@@ -1,9 +1,11 @@
+package tubes;
+
 public class DemoMap {
     public static void main(String[] args) {
         Coordinate mid = new Coordinate(0,0);
         mid.x = 5;
         mid.y = 5;
-        Map tesMap = new Map("inputPeta.txt", mid); // Tes Konstruktor
+        Map tesMap = new Map("tubes/inputPeta.txt", mid); // Tes Konstruktor
         // Konstruktor lolos tes yay
         //tesMap.printMap(); // PrintMap
         // resetMap lolos tes
