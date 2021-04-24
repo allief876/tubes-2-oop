@@ -172,6 +172,10 @@ public abstract class Engimon {
         Skills.add(skill);
         // cout << "sekarang size skills = " << Skills.size() << endl;
     }
+    public void removeSkill(String skill) {
+        //bentar wait implementasinya buat learn
+        
+    }
     
     public void replaceSkills(Skill old_skill, Skill new_skill) {
         Skills.remove(old_skill);
@@ -214,11 +218,11 @@ public abstract class Engimon {
     }
     
     public void printSkills(){
-        int i = 1;
-        for (Skill skill : Skills) {
-            System.out.println(i + ". " + skill.getNama() + ", Mastery level = " + skill.getMasteryLevel());
-            i++;
-        }
+        if (Skills.size()!=0){
+            for (int i = 0; i<Skills.size(); i++) {
+                System.out.println(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel());
+            }
+        } 
     } 
 
     public void upgradeEngimon() {

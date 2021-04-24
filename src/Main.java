@@ -110,7 +110,7 @@ public class Main {
         if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")) {
             return true;
         }
-        else if (command == "change" || command == "battle" || command == "learn" || command == "inventory" || command == "help" || command == "status") {
+        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status")) {
             return true;
         }
         else {
@@ -149,29 +149,35 @@ public class Main {
         System.out.println("3. Pikachu");
         System.out.println("4. Diglett");
         System.out.println("5. Glalie");
-        String starterSpecies = myObj.nextLine();
-        System.out.print("Masukkan Nama Untuk "+ starterSpecies);
         
-        //Nama Pokemon
-        String nameStarter = myObj.nextLine();
         //Atribut Ctor starting engimon
         Coordinate startingEngimon = new Coordinate(2,1);
         int levelStarting = 1; // Level engimon aktif awal
         Engimon E1; // Active engimon awal
     
+        String starterSpecies = myObj.nextLine();
+        while (true){
+            if (starterSpecies.equals("Charmander") || starterSpecies.equals("Squirtle") || starterSpecies.equals("Pikachu") || starterSpecies.equals("Diglett") || starterSpecies.equals("Glalie")){
+                break;
+            }
+            System.out.println("Input Salah, silahkan masukkan input baru");
+            starterSpecies = myObj.nextLine();
+        }
+        System.out.print("Masukkan Nama Untuk "+ starterSpecies +": ");
+        String nameStarter = myObj.nextLine();
         if (starterSpecies == ("Charmander")){E1 = new Charmander(nameStarter, startingEngimon, levelStarting, false); }
         else if (starterSpecies == ("Squirtle")){E1 = new Squirtle(nameStarter, startingEngimon, levelStarting, false); }
         else if (starterSpecies == ("Pikachu")){E1 = new Pikachu(nameStarter, startingEngimon, levelStarting, false); }
         else if (starterSpecies == ("Diglett")){E1 = new Diglett(nameStarter, startingEngimon, levelStarting, false); }
         else {
-            E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false); 
+            E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false);
         }
-    
+
+        
         Coordinate startingPlayer = new Coordinate(2,2);
         Player P = new Player(startingPlayer);
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
-    
     
         // GAME ASLI (TERMASUK PETA)
         Boolean isGameRunning = true;
@@ -179,7 +185,10 @@ public class Main {
         String command;
         String command2;
         int turn = 1;
+
+        //masih bug
         M.changePositionIfNecessary(wildEng, P);
+
         while (isGameRunning) {
             // Siapin dan print map
             if (turn % 4 == 0) {
@@ -202,6 +211,8 @@ public class Main {
                 System.out.println( "Masukkan command Anda: ");
                 command = myObj.nextLine();
             }
+
+            System.out.println(command);
     
             // Menjalankan fungsionalitas berdasarkan command
             if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")){
@@ -253,10 +264,10 @@ public class Main {
                 System.out.println( "Masukkan engimon parent 2: ");
                 engimon2 = myObj.nextLine();
                 
-                if (!(P.findEngimon(engimon1).getName() == "none" && P.findEngimon(engimon2).getName() == "none")){
+                if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
                     Breed b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
                 }
-    
+
             }
             else if (command.equals("status")) {
                 displayGameStatus(P);

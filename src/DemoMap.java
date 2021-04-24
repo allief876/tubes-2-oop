@@ -1,5 +1,6 @@
 package tubes;
-/*
+import tubes.Map;
+
 public class DemoMap {
     public static void main(String[] args) {
         Coordinate mid = new Coordinate(0,0);
@@ -23,4 +24,3 @@ public class DemoMap {
         E.displayInfo(); // displayInfo ???
     }
 }
-*/

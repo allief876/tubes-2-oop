@@ -10,7 +10,7 @@ public class Player {
     private Engimon activeEngimon;
 
     public Inventory<Engimon> InventEngimon;
-    private Inventory<Skill> InventSkill;
+    public Inventory<Skill> InventSkill;
     private int maxCapacity = 30;
 
     //Player();
@@ -29,6 +29,9 @@ public class Player {
         return this.position;
     }
     public void setActiveEngimon(Engimon _engimon){
+        if (this.activeEngimon != null){
+            _engimon.setPosition(this.activeEngimon.getPosition());
+        }
         this.activeEngimon = _engimon;
     }
     public void setEngPos(Coordinate z){
