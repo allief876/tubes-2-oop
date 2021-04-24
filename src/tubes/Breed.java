@@ -54,36 +54,37 @@ public class Breed {
                     SpeciesInherited = eng2.getSpecies();
                 }
             }
-
+        Engimon NewEng;
             if (SpeciesInherited.equals("Charmander")){
-                Engimon NewEng = new Charmander(name,defaultCoordinate,0,false);
+                NewEng = new Charmander(name,defaultCoordinate,0,false);
                 
             }
             else if (SpeciesInherited.equals("Squirtle")){
-                Engimon NewEng = new Squirtle(name,defaultCoordinate,0,false);
+                NewEng = new Squirtle(name,defaultCoordinate,0,false);
                 
             }
             else if (SpeciesInherited.equals("Pikachu")){
-                Engimon NewEng = new Pikachu(name,defaultCoordinate,0,false);
+                NewEng = new Pikachu(name,defaultCoordinate,0,false);
                 
             }
             else if (SpeciesInherited.equals("Diglett")){
-                Engimon NewEng = new Diglett(name,defaultCoordinate,0,false);
+                NewEng = new Diglett(name,defaultCoordinate,0,false);
         
             }
             else if (SpeciesInherited.equals("Glalie")){
-                Engimon NewEng = new Glalie(name,defaultCoordinate,0,false);
+                NewEng = new Glalie(name,defaultCoordinate,0,false);
                 
             }
             else{
                 if (elements1.get(0).equals("Fire")&& elements2.get(0).equals("Electric")){
-                        Engimon NewEng = new Rotom(name,defaultCoordinate,0,false);
+                        NewEng = new Rotom(name,defaultCoordinate,0,false);
                     }
                     else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ice")){
-                        Engimon NewEng = new Lapras(name,defaultCoordinate,0,false);
+                        NewEng = new Lapras(name,defaultCoordinate,0,false);
                     }
-                    else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ground")){
-                        Engimon NewEng = new Wooper(name,defaultCoordinate,0,false);
+                    else// if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ground"))
+                    {
+                        NewEng = new Wooper(name,defaultCoordinate,0,false);
                     }
             }
 
