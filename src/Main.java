@@ -1,15 +1,17 @@
 import tubes.*;
 import tubes.Map;
+import tubes.Breed;
 
 import java.util.*;  // Import the Scanner class
 
-
 public class Main {
 
-    public static int setRandomEngimontLevel() {
+    public static int setRandomEngimonLevel() {
         //srand(time(0));
         // return rand() % 30 + 1;
-        return 0; // ini cadangan doang
+        //.RandomNumbersInARange randomNumbersInARange = new RandomNumbersInARange();
+        //int number = randomNumbersInARange.getRandomNumber(1, 10);
+        return 7;
     }
 
     public static void gameover() {
@@ -90,7 +92,7 @@ public class Main {
         System.out.println("+-----------------------------------------+");
     }
      
-    public void displayGameStatus(Player P) {
+    public static void displayGameStatus(Player P) {
         // Tampilin data active engimon, data player, data inventory
         Engimon currentActiveEngimon = P.getActiveEngimon();
         System.out.println( "Game Status" );
@@ -117,7 +119,7 @@ public class Main {
     }
     
     public static void main(String[] args) {
-        ArrayList<Engimon> wildEng;
+        ArrayList<Engimon> wildEng = new ArrayList<Engimon>();
         Scanner myObj = new Scanner(System.in);
         Coordinate c1 = new Coordinate();
         Coordinate c2 = new Coordinate();
@@ -130,14 +132,14 @@ public class Main {
     
         //Ini Levelnya mau diset gimana awalnya??
         // ctornya Charmander(name, coordinate, level)
-        Engimon A =  new Charmander("Wild1",c1,setRandomEngimonLevel()); wildEng.add(A);
-        Engimon B = new Squirtle("Wild2",c2,setRandomEngimonLevel()); wildEng.add(B);
-        Engimon C = new Pikachu("Wild3",c3,setRandomEngimonLevel()); wildEng.add(C);
-        Engimon D = new Diglett("Wild4",c4,setRandomEngimonLevel()); wildEng.add(D);
-        Engimon E = new Glalie("Wild5",c5,setRandomEngimonLevel()); wildEng.add(E);
-        Engimon F = new Rotom("Wild6",c6,setRandomEngimonLevel()); wildEng.add(F);
-        Engimon G = new Lapras("Wild7",c7,setRandomEngimonLevel()); wildEng.add(G);
-        Engimon H = new Wooper("Wild8",c8,setRandomEngimonLevel()); wildEng.add(H);
+        Engimon A =  new Charmander("Wild1",c1,setRandomEngimonLevel(),true); wildEng.add(A);
+        Engimon B = new Squirtle("Wild2",c2,setRandomEngimonLevel(),true); wildEng.add(B);
+        Engimon C = new Pikachu("Wild3",c3,setRandomEngimonLevel(),true); wildEng.add(C);
+        Engimon D = new Diglett("Wild4",c4,setRandomEngimonLevel(),true); wildEng.add(D);
+        Engimon E = new Glalie("Wild5",c5,setRandomEngimonLevel(),true); wildEng.add(E);
+        Engimon F = new Rotom("Wild6",c6,setRandomEngimonLevel(),true); wildEng.add(F);
+        Engimon G = new Lapras("Wild7",c7,setRandomEngimonLevel(),true); wildEng.add(G);
+        Engimon H = new Wooper("Wild8",c8,setRandomEngimonLevel(),true); wildEng.add(H);
     
         displayMain();
     
@@ -148,7 +150,7 @@ public class Main {
         System.out.println("4. Diglett");
         System.out.println("5. Glalie");
         String starterSpecies = myObj.nextLine();
-        System.out.print("Masukkan Nama Untuk ");
+        System.out.print("Masukkan Nama Untuk "+ starterSpecies);
         
         //Nama Pokemon
         String nameStarter = myObj.nextLine();
@@ -157,12 +159,12 @@ public class Main {
         int levelStarting = 1; // Level engimon aktif awal
         Engimon E1; // Active engimon awal
     
-        if (starterSpecies.equals("Charmander")){E1 = new Charmander(nameStarter, startingEngimon, levelStarting); }
-        else if (starterSpecies.equals("Squirtle")){E1 = new Squirtle(nameStarter, startingEngimon, levelStarting); }
-        else if (starterSpecies.equals("Pikachu")){E1 = new Pikachu(nameStarter, startingEngimon, levelStarting); }
-        else if (starterSpecies.equals("Diglett")){E1 = new Diglett(nameStarter, startingEngimon, levelStarting); }
+        if (starterSpecies == ("Charmander")){E1 = new Charmander(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies == ("Squirtle")){E1 = new Squirtle(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies == ("Pikachu")){E1 = new Pikachu(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies == ("Diglett")){E1 = new Diglett(nameStarter, startingEngimon, levelStarting, false); }
         else {
-            E1 = new Glalie(nameStarter, startingEngimon, levelStarting); 
+            E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false); 
         }
     
         Coordinate startingPlayer = new Coordinate(2,2);
@@ -173,8 +175,7 @@ public class Main {
     
         // GAME ASLI (TERMASUK PETA)
         Boolean isGameRunning = true;
-        Coordinate tengah = new Coordinate(20,20);
-        tubes.Map M = new Map("tubes/inputPeta.txt", tengah);
+        tubes.Map M = new Map("tubes/inputPeta.txt");
         String command;
         String command2;
         int turn = 1;
@@ -204,9 +205,7 @@ public class Main {
     
             // Menjalankan fungsionalitas berdasarkan command
             if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")){
-                char arr[];
-                strcpy(arr,command.c_str());//ini buat error
-                M.move(arr[0], P);
+                M.move(command.charAt(0), P);
             }
             else if (command.equals("help")) {
                 displayHelp();
@@ -231,11 +230,8 @@ public class Main {
                 P.setActiveEngimon(P.findEngimon(command));
             }
             else if (command.equals("battle")) {
-                if (P.isEngimonNearby(wildEng).getName().equals("none") != 0){
-                    P.battle((P.getActiveEngimon()), P.isEngimonNearby(wildEng), wildEng);
-                    if (P.isInventoryEngimonEmpty()){
-                        isGameRunning = false;
-                    }
+                if (!P.isEngimonNearby(wildEng).getName().equals("none")){
+                    Battle btl = new Battle(P,P.getActiveEngimon(), P.isEngimonNearby(wildEng));
                 }
             }
             else if (command.equals("learn")) {
@@ -245,7 +241,7 @@ public class Main {
                 P.showListSkillItem();
                 System.out.println( "Masukkan skill: ");
                 command2 = myObj.nextLine();
-                if (P.findEngimon(command).getName().equals("none") != 0 && P.findSkill(command2).getNama().equals("none") != 0){
+                if (P.findEngimon(command).getName().equals("none") && P.findSkill(command2).getNama().equals("none")){
                     P.learn(P.findEngimon(command), P.findSkill(command2));
                 }
             }
@@ -256,9 +252,9 @@ public class Main {
                 engimon1 = myObj.nextLine();
                 System.out.println( "Masukkan engimon parent 2: ");
                 engimon2 = myObj.nextLine();
-    
-                if (P.findEngimon(engimon1).getName().equals("none") != 0 && P.findEngimon(engimon2).getName().equals("none") != 0){
-                    P.breed( P.findEngimon(engimon1), P.findEngimon(engimon2) );
+                
+                if (!(P.findEngimon(engimon1).getName() == "none" && P.findEngimon(engimon2).getName() == "none")){
+                    Breed b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
                 }
     
             }

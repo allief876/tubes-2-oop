@@ -2,6 +2,8 @@ package tubes;
 
 import java.util.*;
 
+import tubes.Engimon;
+
 public class Player {
 
     private Coordinate position = new Coordinate();
@@ -59,7 +61,7 @@ public class Player {
     // public void battle(Engimon *eng1, Engimon eng2, vector<Engimon>* list_enemies){}
     // Return type BuildNewEng diubah biar bisa assign objek aslinya, bukan pointer ke objek itu.
     // public Engimon BuildNewEng(String nama,String species){}
-    public void breed(Engimon _engimon1, Engimon _engimon2, String engimonName) {
+    /*public void breed(Engimon _engimon1, Engimon _engimon2, String engimonName) {
         // Fire/Electric
         if ((_engimon1.getElements().get(0).equals("Fire") && _engimon2.getElements().get(0).equals("Electric")) || (_engimon1.getElements().get(0).equals("Electric") && _engimon1.getElements().get(0).equals("Fire"))) {
             Engimon newEng = new Rotom(engimonName, new Coordinate(2,2), 1, false);
@@ -75,6 +77,7 @@ public class Player {
         // // Fire
         // else if (){}
     }
+    */
     public void deleteEngimon(Engimon eng){
         InventEngimon.removeItem(eng, 1);
     }
@@ -88,14 +91,9 @@ public class Player {
     public Boolean isInventoryFull(){
         return (InventEngimon.getJumlahInventory() + InventSkill.getJumlahInventory() == this.maxCapacity);
     }
-    // public Engimon findEngimon(String _name){
-    //     for (int i = 0; i < InventEngimon.getJumlahInventory(); i++){
-    //         if (_name == ((InventEngimon.get(i)).getName())){
-    //             Engimon result = InventEngimon.get(i);
-    //             return result;
-    //         }
-    //     }
-    // }
+    public Engimon findEngimon(String name){
+        return (InventEngimon.findItem(name));
+    }
     public boolean isEngimonExist(String name){
         boolean result = false;
         ArrayList<Engimon> temp = InventEngimon.returnItem();
@@ -120,15 +118,49 @@ public class Player {
         }
         return max;
     }
-    
-    //TInggal pake 
-    //InventSkill.findItem(name);
-    //ga usah buat method baru harusnya
-    //public Skill findSkill(String name){}
 
+    public Skill findSkill(String name){
+        return(InventSkill.findItem(name));
+    }
 
-
-    //public Engimon isEngimonNearby(ArrayList<Engimon> InventEngimon){}
+    public Engimon isEngimonNearby(ArrayList<Engimon> wildEng){
+        ArrayList<Engimon> temp = this.InventEngimon.returnItem();
+        int i = getPlayerPosition().x - 1;
+        int j = getPlayerPosition().y - 1;
+        int k;
+        while (i <= getPlayerPosition().x + 1) {
+            while (j <= getPlayerPosition().y + 1) {
+                for (k = 0; k < wildEng.size(); k++) {
+                    if (wildEng.get(k).getPosition().x == i && wildEng.get(k).getPosition().y == j) {
+                        return wildEng.get(k);
+                    }
+                }
+                j++;
+            }
+            j = getPlayerPosition().y-1;
+            i++;
+        }
+        Engimon E = new Charmander("none", new Coordinate(0,0),0,false);
+        return E;
+        
+    }
+    /*int i = getPlayerPosition().x-1;
+    int j = getPlayerPosition().y-1;
+    int k;
+    while (i <= getPlayerPosition().x+1){
+        while(j <= getPlayerPosition().y+1){
+            for (k = 0; k < enemies.size(); k++){
+                if (enemies[k].getPosition().x == i && enemies[k].getPosition().y == j){
+                    return enemies[k];
+                }
+            }
+            j++;
+        }
+        j = getPlayerPosition().y-1;
+        i++;
+    }
+    Engimon *E = new Engimon();
+    return *E; */
 };
 
 

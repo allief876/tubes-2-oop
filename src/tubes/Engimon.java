@@ -20,20 +20,29 @@ public abstract class Engimon {
     protected static Integer LevelTertinggiEngimonNonWild = 1; 
     protected static final Integer JumlahMaxWildEngimon = 20;   // Jumlah wild engimon maksimal dalam peta
     
-//    public Engimon() {
-//         this.Name = "none";
-//         this.Species = "species";
-//         this.Level = 1;
-//         this.Exp = 0;
-//         this.CumExp = 0;
-//         Parent = new ArrayList<String>();
-//         for (int i = 0; i < 2; i++) {
-//             Parent.add("none");
-//         }
-//         for (int i = 0; i < 2; i++) {
-//             Elements.add("none"); // ini bisa dirandomin nanti
-//         }
-//     } 
+    /*
+    public Engimon() {
+        // Engimon dummy
+        this.Name = "none";
+        this.Species = "species";
+        this.Slogan = "none";
+        this.Level = 1;
+        this.Exp = 0;
+        this.CumExp = 0;
+        this.Live = 3;
+        this.isWildEngimon = false;
+        // Inisialisasi array list Elements
+        this.Elements = new ArrayList<String>();
+        this.Elements.add("none");
+        this.Elements.add("none"); 
+        // Inisialisasi array list Parent
+        this.Parent = new ArrayList<String>();
+        Parent.add("none");
+        // Inisialisasi array list Skills
+        this.Skills = new ArrayList<Skill>();
+        // Inisialisasi Coordinate 
+        this.Position = new Coordinate(0,0);
+     } */
     
     public Engimon(String name, String species, String element1, String element2, String slogan, Coordinate spawn, Integer level, Boolean isWildEngimon) {
         this.Name = name;

@@ -1,0 +1,4 @@
+.idea
+.vscode
+src/*.class
+src/tubes/*.class
