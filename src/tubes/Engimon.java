@@ -2,7 +2,7 @@ package tubes;
 
 import java.util.*;
 
-abstract class Engimon {
+public abstract class Engimon {
     protected String Name;                          // Nama engimon, default = engimon
     protected Coordinate Position;
     protected String Species;                       //  spesies engimon, default = species
@@ -15,6 +15,10 @@ abstract class Engimon {
     protected static final Integer MaxExp = 10000;  // max exp sampai mati
     protected String Slogan;                        // text yang dikirim engimon saat berinteraksi
     protected Integer Live;
+    protected Boolean isWildEngimon;
+    protected static Integer JumlahWildEngimon = 0;
+    protected static Integer LevelTertinggiEngimonNonWild = 1; 
+    protected static final Integer JumlahMaxWildEngimon = 20;
     
 //    public Engimon() {
 //         this.Name = "none";
@@ -31,7 +35,7 @@ abstract class Engimon {
 //         }
 //     } 
     
-    public Engimon(String name, String species, String element1, String element2, String slogan, Coordinate spawn, Integer level) {
+    public Engimon(String name, String species, String element1, String element2, String slogan, Coordinate spawn, Integer level, Boolean isWildEngimon) {
         this.Name = name;
         this.Species = species;
         this.Slogan = slogan;
@@ -39,6 +43,10 @@ abstract class Engimon {
         this.Exp = 0;
         this.CumExp = 0;
         this.Live = 3; 
+        this.isWildEngimon = isWildEngimon;
+        if (isWildEngimon) {
+            JumlahWildEngimon++;
+        } 
         // Inisialisasi array list Elements
         this.Elements = new ArrayList<String>();
         this.Elements.add(element1);
@@ -73,9 +81,10 @@ abstract class Engimon {
     @Override
     //Ini buat tampilin data yang muncul saat printInventory()
     public String toString(){
-        return ("Nama: "+ this.getName() + 
-                "\n Species: "+ this.getSpecies() + 
-                "\n Level: " +this.getLevel()+"\n");
+        return this.getName();
+        //return ("Nama: "+ this.getName() + 
+        //        "\n Species: "+ this.getSpecies() + 
+        //        "\n Level: " +this.getLevel()+"\n");
     }
 
     //Getter
@@ -158,6 +167,7 @@ abstract class Engimon {
     
     public void setLevel(Integer _level) {
         this.Level = _level;
+        if (_level > LevelTertinggiEngimonNonWild) LevelTertinggiEngimonNonWild = _level;
     }
     
     public void setExp(Integer _experience) {

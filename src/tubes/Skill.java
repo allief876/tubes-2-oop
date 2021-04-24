@@ -20,6 +20,9 @@ public class Skill {
     public String toString(){
         return ("Nama: "+ this.getNama() + "\n");
     }
+    public ArrayList<String> getElements(){
+        return this.Elements;
+    }
 
     public Integer getBasePower() {
         return this.BasePower;

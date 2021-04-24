@@ -3,8 +3,8 @@ package tubes;
 import java.util.ArrayList;
 
 public class Squirtle extends Engimon {
-    public Squirtle(String name, Coordinate pos, int level) {
-        super(name, "Squirtle", "Water", "none", "Plis kasih nilai bagus ya :)", pos, level);
+    public Squirtle(String name, Coordinate pos, int level, Boolean isWildEngimon) {
+        super(name, "Squirtle", "Water", "none", "Plis kasih nilai bagus ya :)", pos, level, isWildEngimon);
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Water"); element.add("none");
         Elements.addAll(element);

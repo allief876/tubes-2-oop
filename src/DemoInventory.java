@@ -1,7 +1,7 @@
 package tubes;
 
 import java.util.*;
-
+/*
 public class DemoInventory {
         public static void main (String[] args) {
 
@@ -36,3 +36,4 @@ public class DemoInventory {
 
     }
 }
+*/

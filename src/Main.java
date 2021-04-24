@@ -6,7 +6,7 @@ import java.util.*;  // Import the Scanner class
 
 public class Main {
 
-    public static int setRandomEngimonLevel() {
+    public static int setRandomEngimontLevel() {
         //srand(time(0));
         // return rand() % 30 + 1;
         return 0; // ini cadangan doang
@@ -165,15 +165,16 @@ public class Main {
             E1 = new Glalie(nameStarter, startingEngimon, levelStarting); 
         }
     
-        //Dibuat Player spawn pointnya di (2,2)
-        Player P = new Player(2, 2);
+        Coordinate startingPlayer = new Coordinate(2,2);
+        Player P = new Player(startingPlayer);
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
     
     
         // GAME ASLI (TERMASUK PETA)
-        bool isGameRunning = true;
-        tubes.Map M = new Map("tubes/inputPeta.txt", 0, 5, 14, 19);
+        Boolean isGameRunning = true;
+        Coordinate tengah = new Coordinate(20,20);
+        tubes.Map M = new Map("tubes/inputPeta.txt", tengah);
         String command;
         String command2;
         int turn = 1;
@@ -182,7 +183,7 @@ public class Main {
             // Siapin dan print map
             if (turn % 4 == 0) {
                 for (int i = 0; i < wildEng.size(); i++) {
-                    M.setNewRandomPosition(wildEng[i],P);
+                    M.setNewRandomPosition(wildEng.get(i),P);
                 }
             }
             M.fillMap(wildEng,P);
@@ -204,7 +205,7 @@ public class Main {
             // Menjalankan fungsionalitas berdasarkan command
             if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")){
                 char arr[];
-                strcpy(arr,command.c_str());
+                strcpy(arr,command.c_str());//ini buat error
                 M.move(arr[0], P);
             }
             else if (command.equals("help")) {

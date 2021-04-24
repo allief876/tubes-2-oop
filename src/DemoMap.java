@@ -1,5 +1,5 @@
 package tubes;
-
+/*
 public class DemoMap {
     public static void main(String[] args) {
         Coordinate mid = new Coordinate(0,0);
@@ -19,7 +19,8 @@ public class DemoMap {
         // TESTING ENGIMON
         Coordinate pos = new Coordinate();
         int level = 1;
-        Engimon E = new Squirtle("Hello, World", pos, 1);
+        Engimon E = new Squirtle("Hello, World", pos, 1, False);
         E.displayInfo(); // displayInfo ???
     }
 }
+*/

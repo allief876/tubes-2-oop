@@ -5,15 +5,19 @@ import java.io.*;
 import java.util.Random;
 
 public class Map {
-    private Coordinate TitikTengah = new Coordinate();  // Titik batas 4 tipe cell
+    // private Coordinate TitikTengah = new Coordinate();  // Titik batas 4 tipe cell
+    private ArrayList<Coordinate> Mountain = new ArrayList<Coordinate>();
+    private ArrayList<Coordinate> Grassland = new ArrayList<Coordinate>();
+    private ArrayList<Coordinate> Sea = new ArrayList<Coordinate>();
+    private ArrayList<Coordinate> Tundra = new ArrayList<Coordinate>();
     private final Integer LevelMin = 4;    // Level minimum engimon ditulis huruf besar (?)
     public char[][] PetaAwal;
     public char[][] PetaModifikasi;
 
-    public Map(String namafile, Coordinate tengah) {
+    public Map(String namafile) {
         // Inisialisasi PetaAwal
-        int row = 20;
-        int col = 20;
+        int row = 40;
+        int col = 40;
         PetaAwal = new char[row][col];
         // for(int i = 0; i < row * col ; i++){
         //     PetaAwal[i/row][i % col] = '0';
@@ -32,6 +36,18 @@ public class Map {
                     String data = myReader.nextLine();
                     for (int j = 0; j < 20; j++) {
                         PetaAwal[i][j] = data.charAt(j);
+                        if (data.charAt(j) == '^') {
+                            Mountain.add(new Coordinate(i,j));
+                        }
+                        else if (data.charAt(j) == '-') {
+                            Grassland.add(new Coordinate(i,j));
+                        }
+                        else if (data.charAt(j) == '~') {
+                            Sea.add(new Coordinate(i,j));
+                        }
+                        else {
+                            Tundra.add(new Coordinate(i,j));
+                        }
                     }
                     i++;
                 }
@@ -46,7 +62,7 @@ public class Map {
             }
         
         this.resetMap();
-        TitikTengah.setCoordinate(tengah.x, tengah.y);
+        // TitikTengah.setCoordinate(tengah.x, tengah.y);
     }
 
     public void resetMap() {
@@ -210,34 +226,34 @@ public class Map {
         int y = E.getPosition().y;
         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1; // baru masuk kalo x nya 0
         if (x < 0) x = 0;
-        else if (x > 19)  x = 19;
+        else if (x > 39)  x = 39;
         if (y < 0) y = 0;
-        else if (y > 19) y = 19;
+        else if (y > 39) y = 39;
 
         switch (E.getElements().get(0)){
             case "Fire": {
                 // Fire/Electric
                 if (E.getElements().get(1).equals("Electric")) {
-                    while (PetaModifikasi[x][y] != 'M' || PetaModifikasi[x][y] != 'L' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '^' || PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                         x = E.getPosition().x + rand.nextInt(3) - 1;
                         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                         else y = E.getPosition().y;
                         if (x < 0) x = 0;
-                        else if (x > 19)  x = 19;
+                        else if (x > 39)  x = 39;
                         if (y < 0) y = 0;
-                        else if (y > 19) y = 19;
+                        else if (y > 39) y = 39;
                     }
                 }
                 // Fire/none
                 else {
-                    while (PetaModifikasi[x][y] != 'M' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '^' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                         x = E.getPosition().x + rand.nextInt(3) - 1;
                         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                         else y = E.getPosition().y;
                         if (x < 0) x = 0;
-                        else if (x > 19)  x = 19;
+                        else if (x > 39)  x = 39;
                         if (y < 0) y = 0;
-                        else if (y > 19) y = 19;
+                        else if (y > 39) y = 39;
                     }
                 }
                 break;
@@ -245,26 +261,26 @@ public class Map {
             case "Water": {
                 // Water/Ground
                 if (E.getElements().get(1).equals("Ground")) {
-                    while (PetaModifikasi[x][y] != 'S' || PetaModifikasi[x][y] != 'L' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '~' || PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                         x = E.getPosition().x + rand.nextInt(3) - 1;
                         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                         else y = E.getPosition().y;
                         if (x < 0) x = 0;
-                        else if (x > 19)  x = 19;
+                        else if (x > 39)  x = 39;
                         if (y < 0) y = 0;
-                        else if (y > 19) y = 19;
+                        else if (y > 39) y = 39;
                     }
                 }
                 // Water/Ice
                 else if (E.getElements().get(1).equals("Ice")) {
-                    while (PetaModifikasi[x][y] != 'S' || PetaModifikasi[x][y] != 'T' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '~' || PetaModifikasi[x][y] != 'o' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                         x = E.getPosition().x + rand.nextInt(3) - 1;
                         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                         else y = E.getPosition().y;
                         if (x < 0) x = 0;
-                        else if (x > 19)  x = 19;
+                        else if (x > 39)  x = 39;
                         if (y < 0) y = 0;
-                        else if (y > 19) y = 19;
+                        else if (y > 39) y = 39;
                     }
                 }
                 // Water/none
@@ -274,46 +290,46 @@ public class Map {
                         if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                         else y = E.getPosition().y;
                         if (x < 0) x = 0;
-                        else if (x > 19)  x = 19;
+                        else if (x > 39)  x = 39;
                         if (y < 0) y = 0;
-                        else if (y > 19) y = 19;
+                        else if (y > 39) y = 39;
                     }
                 }
                 break;
             }
             case "Electric": {
-                while (PetaModifikasi[x][y] != 'L' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                     x = E.getPosition().x + rand.nextInt(3) - 1;
                     if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                     else y = E.getPosition().y;
                     if (x < 0) x = 0;
-                    else if (x > 19)  x = 19;
+                    else if (x > 39)  x = 39;
                     if (y < 0) y = 0;
-                    else if (y > 19) y = 19;
+                    else if (y > 39) y = 39;
                 }
                 break;
             }
             case "Ground": {
-                while (PetaModifikasi[x][y] != 'L' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                     x = E.getPosition().x + rand.nextInt(3) - 1;
                     if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                     else y = E.getPosition().y;
                     if (x < 0) x = 0;
-                    else if (x > 19)  x = 19;
+                    else if (x > 39)  x = 39;
                     if (y < 0) y = 0;
-                    else if (y > 19) y = 19;
+                    else if (y > 39) y = 39;
                 }
                 break;
             }   
             case "Ice": {
-                while (PetaModifikasi[x][y] != 'T' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != 'o' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
                     x = E.getPosition().x + rand.nextInt(3) - 1;
                     if (x == E.getPosition().x) y = E.getPosition().y + rand.nextInt(3) - 1;
                     else y = E.getPosition().y;
                     if (x < 0) x = 0;
-                    else if (x > 19)  x = 19;
+                    else if (x > 39)  x = 39;
                     if (y < 0) y = 0;
-                    else if (y > 19) y = 19;
+                    else if (y > 39) y = 39;
                 }
                 break;
             }               

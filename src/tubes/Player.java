@@ -1,11 +1,13 @@
 package tubes;
 
+import java.util.*;
+
 public class Player {
 
     private Coordinate position = new Coordinate();
     private Engimon activeEngimon;
 
-    private Inventory<Engimon> InventEngimon;
+    public Inventory<Engimon> InventEngimon;
     private Inventory<Skill> InventSkill;
     private int maxCapacity = 30;
 
@@ -60,15 +62,15 @@ public class Player {
     public void breed(Engimon _engimon1, Engimon _engimon2, String engimonName) {
         // Fire/Electric
         if ((_engimon1.getElements().get(0).equals("Fire") && _engimon2.getElements().get(0).equals("Electric")) || (_engimon1.getElements().get(0).equals("Electric") && _engimon1.getElements().get(0).equals("Fire"))) {
-            Engimon newEng = new Rotom(engimonName, new Coordinate(2,2), 1);
+            Engimon newEng = new Rotom(engimonName, new Coordinate(2,2), 1, false);
         }
         // Water/Ice
         else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ice")) || (_engimon1.getElements().get(0).equals("Ice") && _engimon1.getElements().get(0).equals("Water"))) {
-            Engimon newEng = new Lapras(engimonName, new Coordinate(2,2), 1);
+            Engimon newEng = new Lapras(engimonName, new Coordinate(2,2), 1, false);
         }
         // Water/Ground
         else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ground")) || (_engimon1.getElements().get(0).equals("Ground") && _engimon1.getElements().get(0).equals("Water"))) {
-            Engimon newEng = new Wooper(engimonName, new Coordinate(2,2), 1);
+            Engimon newEng = new Wooper(engimonName, new Coordinate(2,2), 1, false);
         }
         // // Fire
         // else if (){}
@@ -86,12 +88,47 @@ public class Player {
     public Boolean isInventoryFull(){
         return (InventEngimon.getJumlahInventory() + InventSkill.getJumlahInventory() == this.maxCapacity);
     }
-    // public double getAdValues(Engimon eng1, Engimon eng2){}
-    // public int getIdx(String _element){} //untuk mendapatkan indeks pada tabel advantages values
-    //public boolean isInventoryEngimonEmpty(){}
+    // public Engimon findEngimon(String _name){
+    //     for (int i = 0; i < InventEngimon.getJumlahInventory(); i++){
+    //         if (_name == ((InventEngimon.get(i)).getName())){
+    //             Engimon result = InventEngimon.get(i);
+    //             return result;
+    //         }
+    //     }
+    // }
+    public boolean isEngimonExist(String name){
+        boolean result = false;
+        ArrayList<Engimon> temp = InventEngimon.returnItem();
+        for (int i = 0; i < temp.size(); i++){
+            if (name == ((temp.get(i)).getName())){
+                result = true;
+            }
+        }
+        return result;
+    }
+    public Boolean isInventoryEngimonEmpty(){
+        return (InventEngimon.getJumlahInventory() == 0);
+    }
+
+    public Integer getHighestLevel() {
+        Integer max = -1;
+        ArrayList<Engimon> temp = InventEngimon.returnItem();
+        for (int i = 0 ; i < temp.size() ; i++) {
+            if (max < temp.get(i).getLevel()) {
+                max = temp.get(i).getLevel();
+            }
+        }
+        return max;
+    }
+    
+    //TInggal pake 
+    //InventSkill.findItem(name);
+    //ga usah buat method baru harusnya
+    //public Skill findSkill(String name){}
+
+
+
     //public Engimon isEngimonNearby(ArrayList<Engimon> InventEngimon){}
-    //public Engimon findEngimon(String _name){}
-    //public Skill findSkill(String _name){}
 };
 
 

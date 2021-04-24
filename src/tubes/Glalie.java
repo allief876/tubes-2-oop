@@ -3,8 +3,8 @@ package tubes;
 import java.util.ArrayList;
 
 public class Glalie extends Engimon{
-    public Glalie(String name, Coordinate pos, int level) {
-        super(name, "Glalie", "Ice", "none", "Kita doain kakak lulus tepat waktu", pos, level);
+    public Glalie(String name, Coordinate pos, int level, Boolean isWildEngimon) {
+        super(name, "Glalie", "Ice", "none", "Kita doain kakak lulus tepat waktu", pos, level, isWildEngimon);
         ArrayList<String> element = new ArrayList<String>();
         element.add("Ice"); element.add("none");
         Elements.addAll(element);

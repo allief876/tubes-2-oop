@@ -10,6 +10,7 @@ public class Battle {
     protected double powerValueEnemyEngimon;
     protected Player player;
     protected static int winExp = 50;
+
     public Battle(Player _player, Engimon eng1, Engimon eng2){
         this.player = _player;
         this.activeEngimon = eng1;
@@ -154,7 +155,7 @@ public class Battle {
         int baseExp = activeEngimon.getExp();
         activeEngimon.setExp(baseExp+winExp);
         
-        activeEngimon.setCumExp(activeEngimon.getCumExp() + this.winExp);
+        activeEngimon.setCumExp(activeEngimon.getCumExp() + winExp);
         if (activeEngimon.getExp() > 100){
             activeEngimon.setExp(activeEngimon.getCumExp()-100);
             activeEngimon.setLevel(activeEngimon.getLevel()+1);
@@ -163,6 +164,8 @@ public class Battle {
         if (activeEngimon.getCumExp() >= 10000){
             System.out.println("Engimon  mencapai Exp maximum, Engimon dihapus dari Inventory");
             player.deleteEngimon(activeEngimon);
+
+            //harus minta active engimon baru gak?
         }
     }
 
@@ -175,10 +178,27 @@ public class Battle {
             //Engimon mati
             System.out.println("Engimon telah mati, Engimon dihapus dari inventory engimon");
             player.deleteEngimon(activeEngimon);
+            if (!player.isInventoryEngimonEmpty()){
+                System.out.println("Set active engimon! ");
+                System.out.println("Inventory : ");
+                player.showListEngimon();
+                Scanner input = new Scanner(System.in);  // Create a Scanner object
+                System.out.print("Pilih Engimon : ");
+                String EngimonName = input.nextLine();
+                while (!player.isEngimonExist(EngimonName)){
+                    System.out.println("Tidak terdapat engimon dengan nama " + EngimonName + "!");
+                    System.out.print("Pilih Engimon : ");
+                    Scanner input2 = new Scanner(System.in);
+                    EngimonName = input2.nextLine();
+                }
+                Engimon newActiveEngimon = player.InventEngimon.findItem(EngimonName);
+                player.setActiveEngimon(newActiveEngimon);
+            }
+            else //Inventory Engimon Empty
+            {
+                System.out.print("Inventory Engimon kosong");
+            }
         }
     }
-    // public boolean isInventoryEngimonEmpty(){}
     // public Engimon isEngimonNearby(ArrayList<Engimon> InventEngimon){}
-    // public Engimon findEngimon(String _name){}
-    // public Skill findSkill(String _name){}
 }

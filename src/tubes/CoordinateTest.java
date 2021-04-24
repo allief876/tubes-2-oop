@@ -1,9 +1,9 @@
 // Unit testing Coordinate.java
 
-package tubes;
+/*package tubes;
 import static org.junit.Assert.*;
 
-class CoordinateTest
+public class CoordinateTest
 {
     @Test
     public void test() {
@@ -12,4 +12,4 @@ class CoordinateTest
         int output = test.c.x;
         assertEquals(0,output);
     }
-}
+}*/

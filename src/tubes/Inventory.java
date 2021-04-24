@@ -57,9 +57,27 @@ public class Inventory<T> {
         }
         else {
               for (HashMap.Entry<T, Integer> me : Container.entrySet()) {
-                  System.out.print(me.getKey()); //mencetak key
-                  System.out.println(" Jumlah: "+me.getValue()+"\n"); //mencetak value
+                  System.out.print(me.getValue()+"x ");//mencetak value
+                  System.out.println(me.getKey()); //mencetak key
               }
         }
+    }
+
+    public T findItem(String name) {
+            for(HashMap.Entry<T, Integer> entry: Container.entrySet()) {
+                if(entry.getKey().toString() == name) {
+                    return entry.getKey();
+                }
+            }
+            return null;
+        }
+    
+    //mengembalikan item dalam arraylist, bisa untuk diproses lebih lanjut
+    public ArrayList<T> returnItem() {
+        ArrayList<T> temp = new ArrayList<T>();
+        for(HashMap.Entry<T, Integer> entry: Container.entrySet()) {
+            temp.add(entry.getKey());
+        }
+        return temp;
     }
 }
