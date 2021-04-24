@@ -1,7 +1,7 @@
 package tubes;
 
 import java.util.*;
-class Skill {
+public class Skill {
 
     private ArrayList<String> Elements; 
     private Integer BasePower;
