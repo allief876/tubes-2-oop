@@ -2,7 +2,7 @@ package tubes;
 
 import java.util.*;
 
-abstract public class Engimon {
+abstract class Engimon {
     protected String Name;                          // Nama engimon, default = engimon
     protected Coordinate Position;
     protected String Species;                       //  spesies engimon, default = species
