@@ -18,7 +18,7 @@ public abstract class Engimon {
     protected Boolean isWildEngimon;
     protected static Integer JumlahWildEngimon = 0;
     protected static Integer LevelTertinggiEngimonNonWild = 1; 
-    protected static final Integer JumlahMaxWildEngimon = 20;
+    protected static final Integer JumlahMaxWildEngimon = 20;   // Jumlah wild engimon maksimal dalam peta
     
 //    public Engimon() {
 //         this.Name = "none";
@@ -142,6 +142,10 @@ public abstract class Engimon {
     public final Integer getLive() {
         return this.Live;
     }
+
+    public final Boolean getIsWildEngimon() {
+        return this.isWildEngimon;
+    }
     
     // Setter
     public void setPosition(Coordinate z){
@@ -167,7 +171,11 @@ public abstract class Engimon {
     
     public void setLevel(Integer _level) {
         this.Level = _level;
-        if (_level > LevelTertinggiEngimonNonWild) LevelTertinggiEngimonNonWild = _level;
+        if (_level > LevelTertinggiEngimonNonWild) setLevelTertinggiEngimonNonWild(_level);;
+    }
+
+    protected static void setLevelTertinggiEngimonNonWild(Integer _level) {
+        LevelTertinggiEngimonNonWild = _level;
     }
     
     public void setExp(Integer _experience) {
@@ -180,6 +188,10 @@ public abstract class Engimon {
 
     public void setLive(Integer _live) {
         this.Live = _live;
+    }
+
+    public void setIsWildEngimon(Boolean _isWildEngimon) {
+        this.isWildEngimon = _isWildEngimon;
     }
     
     // Lain
