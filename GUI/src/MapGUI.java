@@ -9,7 +9,7 @@ public class MapGUI {
         this.currentGame = gameSetup;
     }
 
-    public void CetakMap(Map ?) {
+    /*public void CetakMap(Map ?) {
 
-    }
+    }*/
 }

@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.event.*; 
-import java.awt.*;
 
 public class MainGUI {
 
@@ -13,7 +12,7 @@ public class MainGUI {
         frm_main.setResizable(false); // Kalo diresize, nanti keliatan jelek-jeleknya
 
         // Add Title Image
-        JLabel lbl_title = new JLabel(new ImageIcon("C:\\Users\\Rafidika\\Documents\\tubes oop 2\\GUI\\src\\assets\\WillyWkwkwk.png"));
+        JLabel lbl_title = new JLabel(new ImageIcon("assets\\WillyWkwkwk.png"));
         lbl_title.setBounds(79,100,642,121);
         frm_main.add(lbl_title);
 

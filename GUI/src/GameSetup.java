@@ -44,12 +44,12 @@ public class GameSetup {
 
         // Add text field
         JTextField text = new JTextField("Insert name for Engimon");
-        text.setBounds(300, 450, 200, 30);
+        text.setBounds(270, 450, 200, 30);
         frame.add(text);
 
         // Add submit button
         JButton submit = new JButton("Submit");
-        submit.setBounds(375, 500, 50, 30);
+        submit.setBounds(320, 500, 80, 30);
         frame.add(submit);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
