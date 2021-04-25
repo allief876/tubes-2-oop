@@ -161,10 +161,12 @@ public abstract class Engimon {
     }
     
     public void setParent(String parent1, String parent2) {
-        Parent.remove(0);
-        Parent.remove(0);
-        Parent.add(parent1);
-        Parent.add(parent2);
+        while (this.Parent.size()>0){
+            this.Parent.remove(0);
+            System.out.println("Remove Parent ");
+        }
+        this.Parent.add(parent1);
+        this.Parent.add(parent2);
     }
     
     public void incSkills(Skill skill) {
@@ -220,10 +222,12 @@ public abstract class Engimon {
         if (Skills.size()!=0){
             for (int i = 0; i<Skills.size(); i++) {
                 System.out.println(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel());
-                System.out.print("Elements\t: " + Skills.get(i).getElements().get(0));
+                System.out.print("Elements: " + Skills.get(i).getElements().get(0));
+                
                 if (!Skills.get(i).getElements().get(1).equals("none")) {
                     System.out.println(" and " + Skills.get(i).getElements().get(1));
                 }
+                System.out.println();
             }
         } 
     } 

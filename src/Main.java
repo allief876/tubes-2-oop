@@ -119,6 +119,14 @@ public class Main {
         }
     }
     
+    public static void deleteWildEng(String nama, ArrayList<Engimon> wildEng) {
+            for (int i = 0 ; i<wildEng.size() ; i++) {
+                if (nama.equals(wildEng.get(i).getName())){
+                    wildEng.remove(i);
+                }
+            }
+        }
+    
     public static void main(String[] args) {
         ArrayList<Engimon> wildEng = new ArrayList<Engimon>();
         Scanner myObj = new Scanner(System.in);
@@ -141,6 +149,7 @@ public class Main {
         Engimon F = new Rotom("Wild6",c6,setRandomEngimonLevel(),true); wildEng.add(F);
         Engimon G = new Lapras("Wild7",c7,setRandomEngimonLevel(),true); wildEng.add(G);
         Engimon H = new Wooper("Wild8",c8,setRandomEngimonLevel(),true); wildEng.add(H);
+
     
         displayMain();
     
@@ -153,7 +162,7 @@ public class Main {
         
         //Atribut Ctor starting engimon
         Coordinate startingEngimon = new Coordinate(2,1);
-        int levelStarting = 1; // Level engimon aktif awal
+        int levelStarting = 15; // Level engimon aktif awal
         Engimon E1; // Active engimon awal
     
         String starterSpecies = myObj.nextLine();
@@ -205,6 +214,28 @@ public class Main {
                 for (int i = 0; i < wildEng.size(); i++) {
                     M.setNewRandomPosition(wildEng.get(i),P, rand);
                 }
+            }
+            Boolean gone;
+            if (turn % 10 == 0) {
+                for (int i = 0; i < wildEng.size() ; i++) {
+                    gone = true;
+                    for (int j = 0; j < wildEng.size() ; j++) {
+                        if (("Wild"+String.valueOf(i+1)).equals(wildEng.get(i).getName())){
+                            gone = false;
+                        }
+                    }
+                    if (gone) {
+                        if (i == 0) wildEng.add(A);
+                        else if (i == 1) wildEng.add(B);
+                        else if (i == 2) wildEng.add(C);
+                        else if (i == 3) wildEng.add(D);
+                        else if (i == 4) wildEng.add(E);
+                        else if (i == 5) wildEng.add(F);
+                        else if (i == 6) wildEng.add(G);
+                        else if (i == 7) wildEng.add(H);
+                    }
+                }
+                M.changePositionIfNecessary(wildEng, P);
             }
             M.fillMap(wildEng,P);
             M.printMap();
@@ -277,6 +308,9 @@ public class Main {
                                     System.out.println("Inventory Engimon kosong, game over!");
                                     isGameRunning = false;
                                 }
+                        }else{
+                            
+                            deleteWildEng(btl.getEnemyEng().getName(), wildEng);
                         }
                     }
                     else{
@@ -299,10 +333,18 @@ public class Main {
                 engimon1 = myObj.nextLine();
                 System.out.println( "Masukkan engimon parent 2: ");
                 engimon2 = myObj.nextLine();
-                
-                if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
-                    Breed b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
+
+           
+                if ((P.findEngimon(engimon1).getElements().get(1).equals("none")) && (P.findEngimon(engimon2).getElements().get(1).equals("none"))){
+                    if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
+                        Breed b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
+                    }
                 }
+                else{
+                    System.out.println(" Breeding Gagal ");
+                    System.out.println(" Salah satu parent memiliki 2 element");
+                }
+                
 
             }
             else if (command.equals("status")) {

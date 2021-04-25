@@ -60,7 +60,11 @@ public class Learn {
         else if ((eng1.getSkills().size()!=0)&&(this.player.InventSkill.getJumlahInventory()!=0)){
             //antara ditampilkan element skill dan user pilih yang sesuai, atau seleksi jd skills compatible dahulu
             System.out.println("Berikut adalah Skill yang dapat anda pelajari:");
+            /*************************************************************************** */
+            /*************************************************************************** */
             this.player.InventSkill.printInventory();
+            /*************************************************************************** */
+            /*************************************************************************** */
             Scanner input = new Scanner(System.in);  // Create a Scanner object
             System.out.println("Masukkan nama skill yang ingin anda pelajari: ");
             String name = input.nextLine();  // Read user input

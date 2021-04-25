@@ -35,6 +35,9 @@ public class Battle {
     public boolean getLoseStatus(){
         return this.loseStatus;
     }
+    public Engimon getEnemyEng(){
+        return this.enemyEngimon;
+    }
 
     public void bertarung(){
         if (powerValueActiveEngimon > powerValueEnemyEngimon){
@@ -150,7 +153,27 @@ public class Battle {
         this.loseStatus = false;
         if(!player.isInventoryFull()){
             System.out.println("Engimon musuh menjadi milik anda!");
-            player.addEngimon(enemyEngimon);
+            Engimon E1;
+            String enemySpecies = enemyEngimon.getSpecies();
+            Coordinate loc = new Coordinate(0,0);
+
+            Scanner myObj = new Scanner(System.in);
+            System.out.print("Masukkan Nama untuk "+ enemySpecies +" baru anda: ");
+            String nameStarter = myObj.nextLine();
+            int levelEnemy = enemyEngimon.getLevel();
+          
+            if (enemySpecies.equals("Charmander")){E1 = new Charmander(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Squirtle")){E1 = new Squirtle(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Pikachu")){E1 = new Pikachu(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Diglett")){E1 = new Diglett(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Rotom")){E1 = new Rotom(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Lapras")){E1 = new Lapras(nameStarter, loc, levelEnemy, false); }
+            else if (enemySpecies.equals("Wooper")){E1 = new Wooper(nameStarter, loc, levelEnemy, false); }
+            else {
+                E1 = new Glalie(nameStarter, loc, levelEnemy, false);
+            }
+            player.addEngimon(E1);
+
         }
         if(!player.isInventoryFull()){
             ArrayList<Skill> enemySkill = enemyEngimon.getSkills(); 

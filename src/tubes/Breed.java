@@ -71,38 +71,41 @@ public class Breed {
             System.out.println(SpeciesInherited);
 
             if (SpeciesInherited.equals("Charmander")){
-                this.NewEng = new Charmander(name,defaultCoordinate,0,false);
+                this.NewEng = new Charmander(name,defaultCoordinate,1,false);
                 System.out.println("Charmander masuk");
                 
             }
             else if (SpeciesInherited.equals("Squirtle")){
-                this.NewEng = new Squirtle(name,defaultCoordinate,0,false);
+                this.NewEng = new Squirtle(name,defaultCoordinate,1,false);
                 System.out.println("Squirtle masuk");
             }
             else if (SpeciesInherited.equals("Pikachu")){
-                this.NewEng = new Pikachu(name,defaultCoordinate,0,false);
+                this.NewEng = new Pikachu(name,defaultCoordinate,1,false);
                 System.out.println("Pikachu masuk");
             }
             else if (SpeciesInherited.equals("Diglett")){
-                this.NewEng = new Diglett(name,defaultCoordinate,0,false);
+                this.NewEng = new Diglett(name,defaultCoordinate,1,false);
                 System.out.println("Diglett masuk");
             }
             else if (SpeciesInherited.equals("Glalie")){
-                this.NewEng = new Glalie(name,defaultCoordinate,0,false);
+                this.NewEng = new Glalie(name,defaultCoordinate,1,false);
                 System.out.println("glalie masuk");
             }
             else{
                 if (elements1.get(0).equals("Fire")&& elements2.get(0).equals("Electric")){
-                        this.NewEng = new Rotom(name,defaultCoordinate,0,false);
+                        this.NewEng = new Rotom(name,defaultCoordinate,1,false);
                         System.out.println("rotom masuk");
                     }
                     else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ice")){
-                        this.NewEng = new Lapras(name,defaultCoordinate,0,false);
+                        this.NewEng = new Lapras(name,defaultCoordinate,1,false);
                         System.out.println("lapras masuk");
                     }
                     else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ground")){
-                        this.NewEng = new Wooper(name,defaultCoordinate,0,false);
+                        this.NewEng = new Wooper(name,defaultCoordinate,1,false);
                         System.out.println("wooper masuk");
+                    }
+                    else{
+                        System.out.println("dual element breeding");
                     }
             }
             this.NewEng.displayInfo();
@@ -158,7 +161,7 @@ public class Breed {
                             this.CalonSkill1 = SkillsCompatible1.get(i);
                             SkillsCompatible1.remove(i);
                             isEmpty1 = false;
-                            System.out.println("insert SKill 1:");
+                            System.out.println("insert Skill 1:");
                         }
                     }
 
@@ -179,9 +182,9 @@ public class Breed {
                     }
 
                 }
-                System.out.println("Calon SKill 1:");
+                System.out.println("Calon Skill 1:");
                 System.out.println(this.CalonSkill1);
-                System.out.println("Calon SKill 2:");
+                System.out.println("Calon Skill 2:");
                 System.out.println(this.CalonSkill2);
 
                 if ((CalonSkill1!=null)&&(CalonSkill2!=null)){
@@ -228,16 +231,25 @@ public class Breed {
             } //Endwhile   
             System.out.println("Skill yang diturunkan:");
             System.out.println(SkillsInherited);
-            
-            
-            for (int i =0; i<SkillsInherited.size(); i++){
+            int i =0;
+            NewEng.replaceSkills(NewEng.getSkills().get(0), SkillsInherited.get(i));
+            for (i =1; i<SkillsInherited.size(); i++){
                NewEng.incSkills(SkillsInherited.get(i));
+               
             } 
             System.out.println("Ini adalah Pokemon turunannya:");
             NewEng.displayInfo();
 
             // Add newEng ke inventory player
+            System.out.println(this.Engimon1.getName()+","+this.Engimon2.getName());
+            //System.out.println(this.Engimon1.getName(),this.Engimon2.getName());
+            NewEng.setParent(this.Engimon1.getName(),this.Engimon2.getName());
             player.InventEngimon.addItem(NewEng, 1);
+
+            //this.Engimon1.setLevel(this.Engimon1.getLevel()-3);
+            //this.Engimon2.setLevel(this.Engimon2.getLevel()-3);
+            eng1.setLevel(eng1.getLevel()-3);
+            eng2.setLevel(eng2.getLevel()-3);
         }
     }
     public int getIdxBreed(String _element)

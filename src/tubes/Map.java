@@ -196,13 +196,14 @@ public class Map {
                         if (ListOfEngimon.get(i).getPosition().x == ListOfEngimon.get(j).getPosition().x && ListOfEngimon.get(i).getPosition().y == ListOfEngimon.get(j).getPosition().y) {
 
                             isToBreak = true;
-
+                            System.out.println("ATAS");
                             setRandomSpawn(ListOfEngimon.get(j),P, rand);
                             break;
                         }
                     }
                 }
                 if (isToBreak) {
+                    System.out.println("BAWAH");
                     break;
                 }
             }
@@ -361,7 +362,7 @@ public class Map {
             if (E.getElements().get(0) == "Fire") {
                 // Fire/Electric
                 if (E.getElements().get(1).equals("Electric")) {
-                    while ((PetaModifikasi[x][y] != '^' && PetaModifikasi[x][y] != '-') ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while ((PetaModifikasi[x][y] != '^' && PetaModifikasi[x][y] != '-') ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                         //System.out.println("Masuk Fire Electric");
                         x = rand.nextInt(10);
                         y = rand.nextInt(10);
@@ -369,7 +370,7 @@ public class Map {
                 }
                 // Fire/none
                 else {
-                    while (PetaModifikasi[x][y] != '^' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '^' || (P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                         //System.out.println("Masuk Fire");
                         x = rand.nextInt(10);
                         y = rand.nextInt(10);
@@ -379,7 +380,7 @@ public class Map {
             else if (E.getElements().get(0) == "Water") {
                 // Water/Ground
                 if (E.getElements().get(1).equals("Ground")) {
-                    while ((PetaModifikasi[x][y] != '~' && PetaModifikasi[x][y] != '-') ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while ((PetaModifikasi[x][y] != '~' && PetaModifikasi[x][y] != '-') ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                         //System.out.println("Masuk Water Ground");
                         x = rand.nextInt(10);
                         y = rand.nextInt(10);
@@ -388,7 +389,7 @@ public class Map {
                 // Water/Ice
                 else if (E.getElements().get(1).equals("Ice")) {
                     while (true) {
-                        if (PetaModifikasi[x][y] != '~' || PetaModifikasi[x][y] != 'o' || !(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                        if (PetaModifikasi[x][y] != '~' || PetaModifikasi[x][y] != 'o' || !(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || !(P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                             break;
                         }
                         else {
@@ -400,7 +401,7 @@ public class Map {
                 }
                 // Water/none
                 else {
-                    while (PetaModifikasi[x][y] != '~' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                    while (PetaModifikasi[x][y] != '~' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                         //System.out.println("Masuk Water");
                         x = rand.nextInt(10);
                         y = rand.nextInt(10);
@@ -409,7 +410,7 @@ public class Map {
                 // break;
             }
             else if (E.getElements().get(0) == "Electric") {
-                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                     //System.out.println("Masuk Electric");
                     x = rand.nextInt(10);
                     y = rand.nextInt(10);
@@ -417,7 +418,7 @@ public class Map {
                 // break;
             }
             else if (E.getElements().get(0) == "Ground") {
-                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != '-' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                     //System.out.println("Masuk Ground");
                     x = rand.nextInt(10);
                     y = rand.nextInt(10);
@@ -425,7 +426,7 @@ public class Map {
                 // break;
             }
             else if (E.getElements().get(0) == "Ice") {
-                while (PetaModifikasi[x][y] != 'o' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y)) {
+                while (PetaModifikasi[x][y] != 'o' ||(P.getPlayerPosition().x == x && P.getPlayerPosition().y == y) || (P.getActiveEngimon().getPosition().x == x && P.getActiveEngimon().getPosition().y == y)) {
                     //System.out.println("Masuk ice");
                     x = rand.nextInt(10);
                     y = rand.nextInt(10);
