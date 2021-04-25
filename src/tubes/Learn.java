@@ -65,7 +65,8 @@ public class Learn {
             System.out.println("Masukkan nama skill yang ingin anda pelajari: ");
             String name = input.nextLine();  // Read user input
 
-            ArrayList<Skill> temp = new ArrayList<Skill>();
+            
+            /**ArrayList<Skill> temp = new ArrayList<Skill>();
             temp = this.player.InventSkill.returnItem();
             for (int i =0; i<temp.size(); i++){
                 System.out.println("masuk loop");
@@ -74,6 +75,9 @@ public class Learn {
                 System.out.println(temp.get(i).getNama());
                 System.out.println(name);
                 System.out.println(temp.get(i).getNama().equals(name));
+                if (this.player.InventSkill.findItem(name)){
+
+                })
                 if ( temp.get(i).getNama().equals(name) ){
                     System.out.println("masuk ada nama yg sama");
                     this.targetSkill = temp.get(i);
@@ -81,13 +85,23 @@ public class Learn {
                     //temp.remove(i); 
                     this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
                 }
-            }
+            }*/
+            
 
-            // add skill pada engimon
+            // add skill pada engimon)
+            //System.out.println("INIIIIII:"+this.player.InventSkill.findItem(name));
+            this.targetSkill = this.player.InventSkill.findItem(name);
             this.targetEngimon.incSkills(this.targetSkill);
             System.out.println("Skill yg ingin ditambah:");
             System.out.println(this.targetSkill);
 
+            if (!this.player.InventSkill.findItem(name).equals(null)) {
+                //System.out.println("Skill teremove");
+                this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
+            }
+            else{
+                System.out.println("Skill gaada yg diremove");
+            }
             //update inventory engimon
             // remove engimon dengan skill lama
             this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);

@@ -9,6 +9,7 @@ public class Battle {
     protected double powerValueActiveEngimon;
     protected double powerValueEnemyEngimon;
     protected Player player;
+    protected boolean loseStatus;
     protected static int winExp = 50;
 
     public Battle(Player _player, Engimon eng1, Engimon eng2){
@@ -29,6 +30,10 @@ public class Battle {
         if (option.equals("yes")) bertarung();
         else if (option.equals("no")) System.out.println("Battle dibatalkan.");
         else System.out.println("Input tidak valid! Battle dibatalkan."); 
+    }
+    
+    public boolean getLoseStatus(){
+        return this.loseStatus;
     }
 
     public void bertarung(){
@@ -142,7 +147,7 @@ public class Battle {
         // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup. 
         // Active engimon juga akan menerima experience points dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu). 
         // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
-        
+        this.loseStatus = false;
         if(!player.isInventoryFull()){
             System.out.println("Engimon musuh menjadi milik anda!");
             player.addEngimon(enemyEngimon);
@@ -173,31 +178,33 @@ public class Battle {
         // Jika engimon player kalah, engimon player akan kehilangan 1 life. 
         // Jika life dari engimon mencapai 0, engimon akan mati. 
         // Kemudian player dapat memilih command selanjutnya seperti biasa.
+        this.loseStatus = true;
         this.activeEngimon.setLive(activeEngimon.getLive()-1);
         if (activeEngimon.getLive() == 0){
             //Engimon mati
             System.out.println("Engimon telah mati, Engimon dihapus dari inventory engimon");
             player.deleteEngimon(activeEngimon);
-            if (!player.isInventoryEngimonEmpty()){
-                System.out.println("Set active engimon! ");
-                System.out.println("Inventory : ");
-                player.showListEngimon();
-                Scanner input = new Scanner(System.in);  // Create a Scanner object
-                System.out.print("Pilih Engimon : ");
-                String EngimonName = input.nextLine();
-                while (!player.isEngimonExist(EngimonName)){
-                    System.out.println("Tidak terdapat engimon dengan nama " + EngimonName + "!");
-                    System.out.print("Pilih Engimon : ");
-                    Scanner input2 = new Scanner(System.in);
-                    EngimonName = input2.nextLine();
-                }
-                Engimon newActiveEngimon = player.InventEngimon.findItem(EngimonName);
-                player.setActiveEngimon(newActiveEngimon);
-            }
-            else //Inventory Engimon Empty
-            {
-                System.out.print("Inventory Engimon kosong");
-            }
+        //     if (!player.isInventoryEngimonEmpty()){
+        //         System.out.println("Set active engimon! ");
+        //         System.out.println("Inventory : ");
+        //         player.showListEngimon();
+        //         Scanner input = new Scanner(System.in);  // Create a Scanner object
+        //         System.out.print("Pilih Engimon : ");
+        //         String EngimonName = input.nextLine();
+        //         while (!player.isEngimonExist(EngimonName)){
+        //             System.out.println("Tidak terdapat engimon dengan nama " + EngimonName + "!");
+        //             System.out.print("Pilih Engimon : ");
+        //             Scanner input2 = new Scanner(System.in);
+        //             EngimonName = input2.nextLine();
+        //         }
+        //         Engimon newActiveEngimon = player.InventEngimon.findItem(EngimonName);
+        //         player.setActiveEngimon(newActiveEngimon);
+        //     }
+        //     else //Inventory Engimon Empty
+        //     {
+        //         System.out.print("Inventory Engimon kosong");
+        //     }
+        // }
         }
     }
     // public Engimon isEngimonNearby(ArrayList<Engimon> InventEngimon){}

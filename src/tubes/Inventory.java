@@ -65,7 +65,7 @@ public class Inventory<T> {
 
     public T findItem(String name) {
             for(HashMap.Entry<T, Integer> entry: Container.entrySet()) {
-                if(entry.getKey().toString() == name) {
+                if(entry.getKey().toString().equals(name)) {
                     return entry.getKey();
                 }
             }

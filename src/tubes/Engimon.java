@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Engimon {
     protected String Name;                          // Nama engimon, default = engimon
-    protected Coordinate Position;
+    protected Coordinate Position = new Coordinate();
     protected String Species;                       //  spesies engimon, default = species
     protected ArrayList<String> Parent;             // nama parent engimon, jika tidak ada parent tetap buat element kosong
     protected ArrayList<Skill> Skills;              // array of skill engimon
@@ -66,7 +66,7 @@ public abstract class Engimon {
         // Inisialisasi array list Skills
         this.Skills = new ArrayList<Skill>();
         // Inisialisasi Coordinate 
-        this.Position = new Coordinate(spawn.x,spawn.y);
+        this.Position.setCoordinate(spawn.x,spawn.y);
     } //c user-defined ctor
     
     
@@ -157,7 +157,7 @@ public abstract class Engimon {
     }
     
     // Setter
-    public void setPosition(Coordinate z){
+    public void setPositionEng(Coordinate z){
         this.Position = z;
     }
     

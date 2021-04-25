@@ -18,7 +18,7 @@ public class Skill {
     @Override
     //Ini buat tampilin data yang muncul saat printInventory()
     public String toString(){
-        return ("Nama: "+ this.getNama() + "\n");
+        return (this.getNama());
     }
     public ArrayList<String> getElements(){
         return this.Elements;

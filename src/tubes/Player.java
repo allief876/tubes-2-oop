@@ -21,16 +21,22 @@ public class Player {
         this.InventSkill = new Inventory<Skill>();
     }
     //void move(char, Map);
-    public void setPosition(Coordinate z){
+    public void setPositionPlayer(Coordinate z){
         this.position.x = z.x;
         this.position.y = z.y;
     }
     public Coordinate getPlayerPosition(){
         return this.position;
     }
+
     public void setActiveEngimon(Engimon _engimon){
         if (this.activeEngimon != null){
-            _engimon.setPosition(this.activeEngimon.getPosition());
+            //this.activeEngimon.displayInfo();
+            //System.out.println(this.activeEngimon.getPosition().x);
+            Coordinate temp = this.activeEngimon.getPosition();
+            //System.out.println(temp.x +"'"+temp.y);
+            System.out.println(_engimon);
+            _engimon.setPositionEng(temp);
         }
         this.activeEngimon = _engimon;
     }
@@ -53,6 +59,10 @@ public class Player {
     */
     public void showListSkillItem() {
         InventSkill.printInventory();
+        /*ArrayList temp = InventSkil.returnItem();
+        for (int i = 0 ; i<temp.size() ; i++) {
+
+        }*/
     }
 
     public void showListEngimon() {
@@ -103,6 +113,7 @@ public class Player {
         for (int i = 0; i < temp.size(); i++){
             if (name == ((temp.get(i)).getName())){
                 result = true;
+                break;
             }
         }
         return result;

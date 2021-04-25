@@ -110,7 +110,7 @@ public class Main {
         if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")) {
             return true;
         }
-        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status")) {
+        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed")) {
             return true;
         }
         else {
@@ -172,12 +172,18 @@ public class Main {
         else {
             E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false);
         }
-
-        
         Coordinate startingPlayer = new Coordinate(2,2);
         Player P = new Player(startingPlayer);
+        
+        /*
+        Engimon E2 = new Diglett("SPAWN", startingEngimon, 10, false);
+        P.addEngimon(E2);*/
+        
+        
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
+        P.InventSkill.addItem(E1.getSkills().get(0), 1);
+
     
         // GAME ASLI (TERMASUK PETA)
         Boolean isGameRunning = true;
@@ -186,14 +192,17 @@ public class Main {
         String command2;
         int turn = 1;
 
-        //masih bug
-        M.changePositionIfNecessary(wildEng, P);
+        M.changePositionIfNecessary(wildEng, P);//random posisi wild engimon
 
+
+        //Scanner input = new Scanner(System.in);
+
+        Random rand = new Random();
         while (isGameRunning) {
             // Siapin dan print map
             if (turn % 4 == 0) {
                 for (int i = 0; i < wildEng.size(); i++) {
-                    M.setNewRandomPosition(wildEng.get(i),P);
+                    M.setNewRandomPosition(wildEng.get(i),P, rand);
                 }
             }
             M.fillMap(wildEng,P);
@@ -212,7 +221,7 @@ public class Main {
                 command = myObj.nextLine();
             }
 
-            System.out.println(command);
+            //System.out.println(command);
     
             // Menjalankan fungsionalitas berdasarkan command
             if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")){
@@ -238,22 +247,52 @@ public class Main {
                 P.showListEngimon();
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
-                P.setActiveEngimon(P.findEngimon(command));
+                System.out.println(command);
+                System.out.println(P.InventEngimon.findItem(command.toString()));
+                P.setActiveEngimon(P.InventEngimon.findItem(command.toString()));
             }
             else if (command.equals("battle")) {
                 if (!P.isEngimonNearby(wildEng).getName().equals("none")){
-                    Battle btl = new Battle(P,P.getActiveEngimon(), P.isEngimonNearby(wildEng));
+                    // Cek apakah active engimon sudah di-set
+                    if (P.getActiveEngimon() != null){
+                        Battle btl = new Battle(P,P.getActiveEngimon(), P.isEngimonNearby(wildEng));
+                        if (btl.getLoseStatus() == true){
+                                if (!P.isInventoryEngimonEmpty()){
+                                    System.out.println("Set active engimon! ");
+                                    System.out.println("Inventory : ");
+                                    P.showListEngimon();  // Create a Scanner object
+                                    System.out.print("Pilih Engimon : ");
+                                    String EngimonName = myObj.nextLine();
+                                    while (P.findEngimon(EngimonName) == null){
+                                        System.out.println("Tidak terdapat engimon dengan nama " + EngimonName + "!");
+                                        System.out.print("Pilih Engimon : ");
+                                        EngimonName = myObj.nextLine();
+                                    }
+                                    Engimon newActiveEngimon = P.findEngimon(EngimonName);
+                                    P.setActiveEngimon(newActiveEngimon);
+                                    System.out.println("Set active engimon berhasil!");
+                                    System.out.println("Active Engimon : "+ P.getActiveEngimon().getName());
+                                }
+                                else //Inventory Engimon Empty
+                                {
+                                    System.out.println("Inventory Engimon kosong, game over!");
+                                }
+                        }
+                    }
+                    else{
+                        System.out.println("Active engimon belum dipasang, battle tidak dapat dilakukan");
+                    }
                 }
             }
             else if (command.equals("learn")) {
                 P.showListEngimon();
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
-                P.showListSkillItem();
-                System.out.println( "Masukkan skill: ");
-                command2 = myObj.nextLine();
-                if (P.findEngimon(command).getName().equals("none") && P.findSkill(command2).getNama().equals("none")){
-                    P.learn(P.findEngimon(command), P.findSkill(command2));
+                //P.showListSkillItem();
+                //System.out.println( "Masukkan skill: ");
+                //command2 = myObj.nextLine();
+                if (!(P.findEngimon(command).getName().equals("none") )){
+                    Learn learn = new Learn(P,P.findEngimon(command));
                 }
             }
             else if (command.equals("breed")){
