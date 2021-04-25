@@ -2,6 +2,8 @@ package tubes;
 
 import java.util.*;
 
+import tubes.Skill;
+
 
 public class Player {
 
@@ -10,7 +12,7 @@ public class Player {
 
     public Inventory<Engimon> InventEngimon;
     public Inventory<Skill> InventSkill;
-    private int maxCapacity = 30;
+    private int maxCapacity = 5;
 
     //Player();
     public Player(Coordinate coor){
@@ -62,6 +64,25 @@ public class Player {
             temp.get(i).printDetail();
         }
     }
+    public boolean CheckSkillCompatible(Engimon eng, String namaskill) {
+        //InventSkill.printInventory();
+        boolean true1 = false;
+        boolean true2 = false;
+        ArrayList<Skill> Skills1 = new ArrayList<Skill>(eng.getSkills());
+        for (int i = 0 ; i<Skills1.size() ; i++) {
+            // cari skill yg sesuai dengan nama
+            if (Skills1.get(i).getNama().equals(namaskill)){
+                //pastikan element skill sesuai dengan element engimon
+                if (Skills1.get(i).isElementSama(eng.getElements().get(0))){
+                    true1 = true;
+                }
+                if (Skills1.get(i).isElementSama(eng.getElements().get(1))){
+                    true2 = true;
+                }
+            }
+        }
+        return (true1 || true2);
+    }
 
     public void showListEngimon() {
         //InventEngimon.printInventory();
@@ -93,35 +114,28 @@ public class Player {
 
     public void showDataEngimon(Engimon _engimon){}//Ini bukan displayInfo() di Engimon???
     public void showDataSkillItem(Skill _skill){}
-    // public void battle(Engimon *eng1, Engimon eng2, vector<Engimon>* list_enemies){}
-    // Return type BuildNewEng diubah biar bisa assign objek aslinya, bukan pointer ke objek itu.
-    // public Engimon BuildNewEng(String nama,String species){}
-    /*public void breed(Engimon _engimon1, Engimon _engimon2, String engimonName) {
-        // Fire/Electric
-        if ((_engimon1.getElements().get(0).equals("Fire") && _engimon2.getElements().get(0).equals("Electric")) || (_engimon1.getElements().get(0).equals("Electric") && _engimon1.getElements().get(0).equals("Fire"))) {
-            Engimon newEng = new Rotom(engimonName, new Coordinate(2,2), 1, false);
-        }
-        // Water/Ice
-        else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ice")) || (_engimon1.getElements().get(0).equals("Ice") && _engimon1.getElements().get(0).equals("Water"))) {
-            Engimon newEng = new Lapras(engimonName, new Coordinate(2,2), 1, false);
-        }
-        // Water/Ground
-        else if ((_engimon1.getElements().get(0).equals("Water") && _engimon2.getElements().get(0).equals("Ground")) || (_engimon1.getElements().get(0).equals("Ground") && _engimon1.getElements().get(0).equals("Water"))) {
-            Engimon newEng = new Wooper(engimonName, new Coordinate(2,2), 1, false);
-        }
-        // // Fire
-        // else if (){}
-    }
-    */
+
     public void deleteEngimon(Engimon eng){
         InventEngimon.removeItem(eng, 1);
     }
 
     public void addEngimon(Engimon _engimon){
-        InventEngimon.addItem(_engimon, 1);
+        if (isInventoryFull()){
+            System.out.println("Inventory Penuh, engimon gagal ditambahkan");
+        }
+        else{
+            InventEngimon.addItem(_engimon, 1);
+        }
+        
     }
     public void addSkillItem(Skill _skill){
-        InventSkill.addItem(_skill, 1);
+        if (isInventoryFull()){
+            System.out.println("Inventory Penuh, skill gagal ditambahkan");
+        }
+        else{
+            InventSkill.addItem(_skill, 1);  
+        }
+        
     }
     public Boolean isInventoryFull(){
         return (InventEngimon.getJumlahInventory() + InventSkill.getJumlahInventory() == this.maxCapacity);
@@ -179,6 +193,14 @@ public class Player {
         Engimon E = new Charmander("none", new Coordinate(0,0),0,false);
         return E;
         
+    }
+    
+    public void lepasEngimon (String namaEngimon) {
+        InventEngimon.removeItem(InventEngimon.findItem(namaEngimon), 1);
+    }
+    
+    public void lepasSkillItem (String namaSkillItem, int quantity) {
+        InventSkill.removeItem(InventSkill.findItem(namaSkillItem), quantity);
     }
     /*int i = getPlayerPosition().x-1;
     int j = getPlayerPosition().y-1;

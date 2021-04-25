@@ -10,12 +10,14 @@ public class Battle {
     protected double powerValueEnemyEngimon;
     protected Player player;
     protected boolean loseStatus;
+    protected boolean tolakBattle = false;
     protected static int winExp = 50;
 
     public Battle(Player _player, Engimon eng1, Engimon eng2){
         this.player = _player;
         this.activeEngimon = eng1;
         this.enemyEngimon = eng2;
+    
         powerValueActiveEngimon = getPowerValue(activeEngimon, enemyEngimon);
         powerValueEnemyEngimon = getPowerValue(enemyEngimon, activeEngimon);
         activeEngimon.displayInfo();
@@ -28,8 +30,18 @@ public class Battle {
         System.out.println("Apakah anda ingin bertarung? (yes/no) ");
         String option = input.nextLine();  // Read user input
         if (option.equals("yes")) bertarung();
-        else if (option.equals("no")) System.out.println("Battle dibatalkan.");
-        else System.out.println("Input tidak valid! Battle dibatalkan."); 
+        else if (option.equals("no")){
+            this.tolakBattle = true;
+            System.out.println("Battle dibatalkan.");
+        }
+        else {
+            this.tolakBattle = true;
+            System.out.println("Input tidak valid! Battle dibatalkan."); 
+        }
+    }
+
+    public boolean getTolakBattle() {
+        return this.tolakBattle;
     }
     
     public boolean getLoseStatus(){
@@ -200,7 +212,7 @@ public class Battle {
     public void lose(){
         // Jika engimon player kalah, engimon player akan kehilangan 1 life. 
         // Jika life dari engimon mencapai 0, engimon akan mati. 
-        // Kemudian player dapat memilih command selanjutnya seperti biasa.
+        // Kestemn player dapat memilih command selanjutnya seperti biasa.
         this.loseStatus = true;
         this.activeEngimon.setLive(activeEngimon.getLive()-1);
         if (activeEngimon.getLive() == 0){

@@ -189,11 +189,17 @@ public class Breed {
 
                 if ((CalonSkill1!=null)&&(CalonSkill2!=null)){
                         // Masukan skill pilihan ke arraylist skillinherited
+
                     if ( (CalonSkill1.getMasteryLevel()==CalonSkill2.getMasteryLevel()) && (CalonSkill1.getNama()==CalonSkill2.getNama()) ){
                         //skill yang dipilih dimiliki oleh kedua parent:
                         //mastery level yang sama,skill yang di-inherit memiliki mastery level bernilai mastery level parent A + 1
-                        CalonSkill1.SetEM(CalonSkill1.getMasteryLevel()+1);
-
+                        //set max mastery
+                        if(CalonSkill1.CheckMasteryLevel()){
+                            CalonSkill1.SetEM(CalonSkill1.getMasteryLevel()+1);
+                        }
+                        else{
+                            CalonSkill1.SetEM(3);
+                        }
                         SkillsInherited.add(CalonSkill1);
                     }
                     else if ( (CalonSkill1.getMasteryLevel()!=CalonSkill2.getMasteryLevel()) && (CalonSkill1.getNama()==CalonSkill2.getNama()) ) {

@@ -90,6 +90,8 @@ public class Main {
         System.out.println("|interact         |interact with engimon  |");
         System.out.println("|changeName       |change engimon name    |");
         System.out.println("|status           |view game status       |");
+        System.out.println("|dropSkillItem    |membuang skill item    |");
+        System.out.println("|dropEngimon      |membuang engimon       |");
         System.out.println("|help             |view help              |");
         System.out.println("+-----------------------------------------+");
     }
@@ -113,7 +115,7 @@ public class Main {
         if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")) {
             return true;
         }
-        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed") || command.equals("changeName") || command.equals("interact")) {
+        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed") || command.equals("changeName") || command.equals("interact") || command.equals("dropEngimon")|| command.equals("dropSkillItem")) {
             return true;
         }
         else {
@@ -311,8 +313,9 @@ public class Main {
                                     isGameRunning = false;
                                 }
                         }else{
-                            
-                            deleteWildEng(btl.getEnemyEng().getName(), wildEng);
+                            if (!btl.getTolakBattle()){
+                                deleteWildEng(btl.getEnemyEng().getName(), wildEng);
+                            }
                         }
                     }
                     else{
@@ -363,6 +366,46 @@ public class Main {
                 String namaBaru = myObj.nextLine();
                 P.changeNameEngimon(name, namaBaru);
 
+            }
+            else if (command.equals("dropSkillItem")) {
+                System.out.println("Pilih skill item yang ingin dibuang: ");
+                P.InventSkill.printInventory();
+                String name = myObj.nextLine();
+                while (P.InventSkill.findItem(name).equals(null)){
+                    System.out.println("Skill item tidak ada di inventory, masukkan kembali");
+                    System.out.println("Skill item yang ingin dibuang: ");
+                    name = myObj.nextLine();
+                }
+                System.out.println("Jumlah yang ingin dibuang: ");
+                Integer jumlah = myObj.nextInt();
+                while (jumlah > P.InventSkill.getAmount(P.InventSkill.findItem(name))){
+                    System.out.println("Jumlah melebihi yang dimiliki, masukkan kembali");
+                    System.out.println("Jumlah yang ingin dibuang: ");
+                    jumlah = myObj.nextInt();
+                }
+                P.lepasSkillItem(name, jumlah);
+            }
+            else if (command.equals("dropEngimon")) {
+                if (P.InventEngimon.returnItem().size() == 1){
+                    System.out.println("Hanya tersisa active engimon");
+                }
+                else {
+                    System.out.println("Pilih engimon yang ingin dilepas: ");
+                    P.InventEngimon.printInventory();
+                    String name = myObj.nextLine();
+                    while(P.InventEngimon.findItem(name)==(null) || name.equals(P.getActiveEngimon().getName())){
+                        if (name.equals(P.getActiveEngimon().getName())){
+                            System.out.println("Tidak bisa melepas active engimon, masukkan kembali");
+                            System.out.println("Engimon yang ingin dilepas: ");
+                        }
+                        else{
+                            System.out.println("Engimon tidak ada di inventory, masukkan kembali");
+                            System.out.println("Engimon yang ingin dilepas: ");
+                        }
+                        name = myObj.nextLine();
+                    }
+                    P.lepasEngimon(name);
+                }
             }
             turn++;
         }

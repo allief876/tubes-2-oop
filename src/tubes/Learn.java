@@ -24,11 +24,34 @@ public class Learn {
             
             //antara ditampilkan element skill dan user pilih yang sesuai, atau seleksi jd skills compatible dahulu
             System.out.println("Berikut adalah Skill yang dapat anda pelajari:");
-            this.player.InventSkill.printInventory();
+            this.player.showListSkillItem(); // <- ini harusnya udah WIl
             System.out.println("Masukkan nama skill yang ingin anda pelajari: ");
             name = input.nextLine();  // Read user input
 
-            ArrayList<Skill> temp = new ArrayList<Skill>();
+            if (this.player.CheckSkillCompatible(eng1,name)){
+                // add skill pada engimon)
+                //System.out.println("INIIIIII:"+this.player.InventSkill.findItem(name));
+                this.targetSkill = this.player.InventSkill.findItem(name);
+                this.targetEngimon.incSkills(this.targetSkill);
+                System.out.println("Skill yg ingin ditambah:");
+                System.out.println(this.targetSkill);
+
+                if (!this.player.InventSkill.findItem(name).equals(null)) {
+                    //System.out.println("Skill teremove");
+                    this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
+                    //update inventory engimon
+                    // remove engimon dengan skill lama
+                    this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);
+                    
+                    // add engimon dgn skill baru
+                    this.player.InventEngimon.addItem(this.targetEngimon, 1);
+                }
+                else{
+                    System.out.println("Tidak ada pilihan skill, learn gagal");
+                }
+            }
+
+            /**ArrayList<Skill> temp = new ArrayList<Skill>();
             temp = this.player.InventSkill.returnItem();
             for (int i =0; i<temp.size(); i++){
                 System.out.println("masuk loop");
@@ -44,17 +67,7 @@ public class Learn {
                     //temp.remove(i); 
                     this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
                 }
-            }
-
-            // add skill pada engimon
-            this.targetEngimon.incSkills(this.targetSkill);
-
-            //update inventory engimon
-            // remove engimon dengan skill lama
-            this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);
-            
-            // add engimon dgn skill baru
-            this.player.InventEngimon.addItem(this.targetEngimon, 1);
+            }*/    
         
         }
         else if ((eng1.getSkills().size()!=0)&&(this.player.InventSkill.getJumlahInventory()!=0)){
@@ -62,13 +75,38 @@ public class Learn {
             System.out.println("Berikut adalah Skill yang dapat anda pelajari:");
             /*************************************************************************** */
             /*************************************************************************** */
-            this.player.InventSkill.printInventory();
+            this.player.showListSkillItem(); // <- ini harusnya udah WIl
             /*************************************************************************** */
             /*************************************************************************** */
             Scanner input = new Scanner(System.in);  // Create a Scanner object
             System.out.println("Masukkan nama skill yang ingin anda pelajari: ");
             String name = input.nextLine();  // Read user input
 
+            if (this.player.CheckSkillCompatible(eng1,name)){
+                // add skill pada engimon)
+                //System.out.println("INIIIIII:"+this.player.InventSkill.findItem(name));
+                this.targetSkill = this.player.InventSkill.findItem(name);
+                this.targetEngimon.incSkills(this.targetSkill);
+                System.out.println("Skill yg ingin ditambah:");
+                System.out.println(this.targetSkill);
+
+                if (!this.player.InventSkill.findItem(name).equals(null)) {
+                    //System.out.println("Skill teremove");
+                    this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
+                    //update inventory engimon
+                    // remove engimon dengan skill lama
+                    this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);
+                    
+                    // add engimon dgn skill baru
+                    this.player.InventEngimon.addItem(this.targetEngimon, 1);
+                }
+                else{
+                    System.out.println("Tidak ada pilihan skill, learn gagal");
+                }
+            }
+            else{
+                System.out.println("pilihan skill tidak compatible, learn gagal");
+            }
             
             /**ArrayList<Skill> temp = new ArrayList<Skill>();
             temp = this.player.InventSkill.returnItem();
@@ -90,28 +128,8 @@ public class Learn {
                     this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
                 }
             }*/
-            
 
-            // add skill pada engimon)
-            //System.out.println("INIIIIII:"+this.player.InventSkill.findItem(name));
-            this.targetSkill = this.player.InventSkill.findItem(name);
-            this.targetEngimon.incSkills(this.targetSkill);
-            System.out.println("Skill yg ingin ditambah:");
-            System.out.println(this.targetSkill);
-
-            if (!this.player.InventSkill.findItem(name).equals(null)) {
-                //System.out.println("Skill teremove");
-                this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
-            }
-            else{
-                System.out.println("Skill gaada yg diremove");
-            }
-            //update inventory engimon
-            // remove engimon dengan skill lama
-            this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);
             
-            // add engimon dgn skill baru
-            this.player.InventEngimon.addItem(this.targetEngimon, 1);
         }
         else{
             System.out.println("Tidak ada skill yang bisa anda pelajari");

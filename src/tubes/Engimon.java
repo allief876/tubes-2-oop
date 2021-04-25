@@ -51,11 +51,13 @@ public abstract class Engimon {
         this.Level = level;
         this.Exp = 0;
         this.CumExp = 0;
-        this.Live = 3; 
         this.isWildEngimon = isWildEngimon;
         if (isWildEngimon) {
+            this.Live = 1;
             JumlahWildEngimon++;
-        } 
+        }else{
+            this.Live = 3; 
+        }
         // Inisialisasi array list Elements
         this.Elements = new ArrayList<String>();
         this.Elements.add(element1);
