@@ -106,6 +106,9 @@ public abstract class Engimon {
         return this.Name;
     }
     
+    public final void setName(String name) {
+        this.Name = name;
+    }
     public final Coordinate getPosition() {
         return this.Position;
     }
@@ -237,5 +240,8 @@ public abstract class Engimon {
             this.setLevel(this.getLevel()+1);
             this.setExp(this.getExp()-100);
         }
+    }
+    public void interactEngimon() {
+        System.out.println(this.Slogan);
     }
 }

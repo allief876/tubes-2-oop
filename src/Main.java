@@ -87,6 +87,8 @@ public class Main {
         System.out.println("|battle           |battle wild engimon    |");
         System.out.println("|learn            |learn skill to engimon |");
         System.out.println("|inventory        |view inventory         |");
+        System.out.println("|interact         |interact with engimon  |");
+        System.out.println("|changeName       |change engimon name    |");
         System.out.println("|status           |view game status       |");
         System.out.println("|help             |view help              |");
         System.out.println("+-----------------------------------------+");
@@ -111,7 +113,7 @@ public class Main {
         if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")) {
             return true;
         }
-        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed")) {
+        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed") || command.equals("changeName") || command.equals("interact")) {
             return true;
         }
         else {
@@ -349,6 +351,18 @@ public class Main {
             }
             else if (command.equals("status")) {
                 displayGameStatus(P);
+            }
+            else if (command.equals("interact")) {
+                P.getActiveEngimon().interactEngimon();
+            }
+            else if (command.equals("changeName")) {
+                System.out.println("Pilih engimon yang ingin diubah namanya: ");
+                P.InventEngimon.printInventory();
+                String name = myObj.nextLine();
+                System.out.print("Masukkan nama baru engimon: ");
+                String namaBaru = myObj.nextLine();
+                P.changeNameEngimon(name, namaBaru);
+
             }
             turn++;
         }

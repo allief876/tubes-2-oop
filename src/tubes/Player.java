@@ -46,10 +46,9 @@ public class Player {
         return this.activeEngimon;
     }
 
-    public void learn(Engimon _engimon, Skill _skill){
-
+    public void changeNameEngimon (String nameEngimon, String namaBaru) {
+        (this.InventEngimon.findItem(nameEngimon)).setName(namaBaru);
     }
-
     /* 
     #mungkin klo mau nyoba biar ga usah pisah 2
     public void showInvent(Inventory<T> I) {
