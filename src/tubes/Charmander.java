@@ -7,7 +7,7 @@ public class Charmander extends Engimon {
         super(name, "Charmander", "Fire", "none", "Ada tubes 3 gak?", pos, level, isWildEngimon);
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Fire"); element.add("none");
-        Elements.addAll(element);
+        //Elements.addAll(element);
         Skill newSkill = new Skill(element,105,1,"Pyro Ball");
         this.incSkills(newSkill);
     }

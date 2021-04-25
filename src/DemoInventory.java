@@ -1,10 +1,21 @@
-package tubes;
+import tubes.*;
 
 import java.util.*;
-/*
+
 public class DemoInventory {
         public static void main (String[] args) {
+            Coordinate startingEngimon = new Coordinate(2,2);
+            Engimon E1 = new Diglett("Test", startingEngimon, 1, false);
+            System.out.println(E1.getElements());
+            E1.displayInfo();
 
+            Engimon E2 = new Rotom("Test", startingEngimon, 1, false);
+            System.out.println(E2.getElements());
+            E2.displayInfo();
+
+        }
+}
+/*
             //Buat Engimonnya
             Coordinate startingEngimon = new Coordinate(2,1);
             int levelStarting = 10;

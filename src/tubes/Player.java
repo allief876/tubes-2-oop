@@ -2,7 +2,6 @@ package tubes;
 
 import java.util.*;
 
-import tubes.Engimon;
 
 public class Player {
 
@@ -58,15 +57,39 @@ public class Player {
     }
     */
     public void showListSkillItem() {
-        InventSkill.printInventory();
-        /*ArrayList temp = InventSkil.returnItem();
+        //InventSkill.printInventory();
+        ArrayList<Skill> temp = InventSkill.returnItem();
         for (int i = 0 ; i<temp.size() ; i++) {
-
-        }*/
+            temp.get(i).printDetail();
+        }
     }
 
     public void showListEngimon() {
-        InventEngimon.printInventory();
+        //InventEngimon.printInventory();
+        ArrayList<Engimon> temp = InventEngimon.returnItem();
+        for (int i = 0 ; i<temp.size() ; i++) {
+            System.out.println("Nama\t: "+temp.get(i).getName());
+            System.out.println("Level\t: "+temp.get(i).getLevel());
+            System.out.println("Live\t: "+ temp.get(i).getLive());
+            try{
+                if (!temp.get(0).getParent().equals("none")) {
+                    System.out.println("Parent\t\t: " + temp.get(0).getParent().get(0) + " and " + temp.get(0).getParent().get(1));
+                }
+            } catch (NoParentException e){
+                System.out.println("Engimon tidak memiliki Parent");
+            }
+            System.out.println("Species\t: "+temp.get(i).getSpecies());
+            System.out.print("Elements: " + temp.get(i).getElements().get(0));
+            if (!temp.get(i).getElements().get(1).equals("none")) {
+                System.out.println(" and " + temp.get(i).getElements().get(1));
+            }
+            else {
+                System.out.println();
+            }
+            System.out.println("Skills: ");
+            temp.get(i).printSkills();
+            System.out.println();
+        }
     }
 
     public void showDataEngimon(Engimon _engimon){}//Ini bukan displayInfo() di Engimon???

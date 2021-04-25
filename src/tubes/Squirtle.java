@@ -7,7 +7,7 @@ public class Squirtle extends Engimon {
         super(name, "Squirtle", "Water", "none", "Plis kasih nilai bagus ya :)", pos, level, isWildEngimon);
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Water"); element.add("none");
-        Elements.addAll(element);
+        //Elements.addAll(element);
         Skill newSkill = new Skill(element,75,1,"Waterfall");
         this.incSkills(newSkill);
     }

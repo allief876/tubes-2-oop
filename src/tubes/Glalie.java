@@ -7,7 +7,7 @@ public class Glalie extends Engimon{
         super(name, "Glalie", "Ice", "none", "Kita doain kakak lulus tepat waktu", pos, level, isWildEngimon);
         ArrayList<String> element = new ArrayList<String>();
         element.add("Ice"); element.add("none");
-        Elements.addAll(element);
+        //Elements.addAll(element);
         Skill newSkill = new Skill(element,90,1,"Freeze Shock");
         this.incSkills(newSkill);
     }

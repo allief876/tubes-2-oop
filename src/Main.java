@@ -101,9 +101,10 @@ public class Main {
         System.out.println( "Player: " );
         System.out.println( "Koordinat player: (" + P.getPlayerPosition().x + "," + P.getPlayerPosition().y + ")");
         System.out.println( "Engimon List: " );
-        P.showListEngimon();
+        P.InventEngimon.printInventory();
         System.out.println( "Skill Item List: " );
-        P.showListSkillItem();
+        P.InventSkill.printInventory();
+        System.out.println();
     }
     
     public static boolean isCommandValid (String command) {
@@ -165,10 +166,10 @@ public class Main {
         }
         System.out.print("Masukkan Nama Untuk "+ starterSpecies +": ");
         String nameStarter = myObj.nextLine();
-        if (starterSpecies == ("Charmander")){E1 = new Charmander(nameStarter, startingEngimon, levelStarting, false); }
-        else if (starterSpecies == ("Squirtle")){E1 = new Squirtle(nameStarter, startingEngimon, levelStarting, false); }
-        else if (starterSpecies == ("Pikachu")){E1 = new Pikachu(nameStarter, startingEngimon, levelStarting, false); }
-        else if (starterSpecies == ("Diglett")){E1 = new Diglett(nameStarter, startingEngimon, levelStarting, false); }
+        if (starterSpecies.equals("Charmander")){E1 = new Charmander(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies.equals("Squirtle")){E1 = new Squirtle(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies.equals("Pikachu")){E1 = new Pikachu(nameStarter, startingEngimon, levelStarting, false); }
+        else if (starterSpecies.equals("Diglett")){E1 = new Diglett(nameStarter, startingEngimon, levelStarting, false); }
         else {
             E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false);
         }
@@ -182,7 +183,7 @@ public class Main {
         
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
-        P.InventSkill.addItem(E1.getSkills().get(0), 1);
+        //P.InventSkill.addItem(E1.getSkills().get(0), 1);
 
     
         // GAME ASLI (TERMASUK PETA)
@@ -211,7 +212,7 @@ public class Main {
             // print status permainan
             displayGameStatus(P);
             System.out.println( "Ketik \"help\" untuk menampilkan list command" );
-            
+            System.out.println();
             // Memasukkan dan memvalidasi input
             System.out.println( "Masukkan command Anda: ");
             command = myObj.nextLine();
@@ -247,8 +248,6 @@ public class Main {
                 P.showListEngimon();
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
-                System.out.println(command);
-                System.out.println(P.InventEngimon.findItem(command.toString()));
                 P.setActiveEngimon(P.InventEngimon.findItem(command.toString()));
             }
             else if (command.equals("battle")) {
@@ -276,6 +275,7 @@ public class Main {
                                 else //Inventory Engimon Empty
                                 {
                                     System.out.println("Inventory Engimon kosong, game over!");
+                                    isGameRunning = false;
                                 }
                         }
                     }
@@ -288,9 +288,6 @@ public class Main {
                 P.showListEngimon();
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
-                //P.showListSkillItem();
-                //System.out.println( "Masukkan skill: ");
-                //command2 = myObj.nextLine();
                 if (!(P.findEngimon(command).getName().equals("none") )){
                     Learn learn = new Learn(P,P.findEngimon(command));
                 }

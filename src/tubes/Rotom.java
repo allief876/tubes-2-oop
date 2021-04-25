@@ -7,7 +7,7 @@ public class Rotom extends Engimon{
         super(name, "Rotom", "Fire", "Electric", "Siap begadang demi tubes", pos, level, isWildEngimon);
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Fire"); element.add("Electric");
-        Elements.addAll(element);
+        //Elements.addAll(element);
         Skill newSkill = new Skill(element,75,1,"Overloaded");
         this.incSkills(newSkill);
     }

@@ -59,7 +59,7 @@ public abstract class Engimon {
         // Inisialisasi array list Elements
         this.Elements = new ArrayList<String>();
         this.Elements.add(element1);
-        if (element2 != "none") this.Elements.add(element2); 
+        this.Elements.add(element2); 
         // Inisialisasi array list Parent
         this.Parent = new ArrayList<String>();
         Parent.add("none");
@@ -72,6 +72,9 @@ public abstract class Engimon {
     
     public void displayInfo(){
         System.out.println("Name\t\t: " + this.Name);
+        System.out.println("Experience\t: "+this.Exp+"/100");
+        System.out.println("Level\t\t: "+ this.Level);
+        System.out.println("Live\t\t: "+ this.Live);
         System.out.println("Species\t\t: " + this.Species);
         if (Parent.get(0) != "none") {
             System.out.println("Parent\t\t: " + Parent.get(0) + " and " + Parent.get(1));
@@ -82,9 +85,11 @@ public abstract class Engimon {
         System.out.println("Skills\t\t: ");
         printSkills();
         System.out.println();        
-        System.out.print("Elements\t: " + Elements.get(0));
-        if (!Elements.get(1).equals("none")) System.out.println(" and " + Elements.get(1));
-    
+        /**System.out.print("Elements\t: " + Elements.get(0));
+        if (!this.Elements.get(1).equals("none")) {
+            System.out.println(" and " + Elements.get(1));
+        }*/
+        System.out.println(); 
     } // tampilin semua data engimon
     
     @Override
@@ -110,18 +115,12 @@ public abstract class Engimon {
     }
     
     public final ArrayList<String> getParent() throws NoParentException {
-        try {
-            if (Parent.get(0) == "none") {
-                throw new NoParentException();
-            }
-            else {
-                return Parent;
-            }
+        if (Parent.get(0) == "none") {
+            throw new NoParentException();
         }
-        catch (NoParentException noParent) {
-            System.out.println(noParent.getErrorMessage());
+        else {
+            return Parent;
         }
-        return null; // return null akan dijalankan jika "Yatim Piatu"
     }
     
     public final ArrayList<Skill> getSkills() { 
@@ -221,6 +220,10 @@ public abstract class Engimon {
         if (Skills.size()!=0){
             for (int i = 0; i<Skills.size(); i++) {
                 System.out.println(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel());
+                System.out.print("Elements\t: " + Skills.get(i).getElements().get(0));
+                if (!Skills.get(i).getElements().get(1).equals("none")) {
+                    System.out.println(" and " + Skills.get(i).getElements().get(1));
+                }
             }
         } 
     } 

@@ -91,10 +91,10 @@ public class Map {
     {
         this.resetMap();
         changePeta(P.getPlayerPosition().x,P.getPlayerPosition().y, 'P');
-        System.out.println(P.getActiveEngimon());
-        System.out.println(P.getActiveEngimon().getPosition().getX());
-        System.out.println(P.getActiveEngimon().getPosition().getY());
-        System.out.println(PetaModifikasi[2][2]);
+        //System.out.println(P.getActiveEngimon());
+        //System.out.println(P.getActiveEngimon().getPosition().getX());
+        //System.out.println(P.getActiveEngimon().getPosition().getY());
+        //System.out.println(PetaModifikasi[2][2]);
         changePeta(P.getActiveEngimon().getPosition().getX(),P.getActiveEngimon().getPosition().getY(), 'A');
         for (int k = 0; k < El.size(); k++)
         {

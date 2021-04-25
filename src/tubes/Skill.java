@@ -37,9 +37,11 @@ public class Skill {
     }
 
     public void printDetail() {
-        System.out.println("Skill Name\t:" + this.Nama);
+        System.out.println("Name\t:" + this.Nama);
         System.out.println("Element 1\t: " + Elements.get(0));
-        System.out.println("Element 2\t: " + Elements.get(1));
+        if (!Elements.get(1).equals("none")){
+            System.out.println("Element 2\t: " + Elements.get(1));
+        }
         System.out.println("Base Power\t: " + this.BasePower);
         System.out.println("Mastery Level\t: " + this.MasteryLevel);
     }

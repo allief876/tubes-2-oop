@@ -7,7 +7,8 @@ public class Diglett extends Engimon {
         super(name, "Diglett", "Ground", "none", "Add UID genshin: 821919186", pos, level, isWildEngimon);
         ArrayList<String> element = new ArrayList<String>();
         element.add("Ground"); element.add("none");
-        Elements.addAll(element);
+        
+        //Elements.addAll(element);
         Skill newSkill = new Skill(element,115,1,"Max Quake");
         this.incSkills(newSkill);
     }
