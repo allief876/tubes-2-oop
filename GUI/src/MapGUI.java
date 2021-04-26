@@ -7,7 +7,7 @@ public class MapGUI {
     private JFrame frm_main;
     GameSetup currentGame;
 
-    public MapGUI(/*int ukuranMap*/) {
+    public MapGUI(String species, String name) {
 
         // Set up frm utama
         frm_main = new JFrame("WillyWkwkwk");
@@ -24,6 +24,16 @@ public class MapGUI {
                 frm_main.add(btn_map);
             }
         }
+
+        // help
+        JButton btn_help = new JButton("Help");
+        btn_help.setBounds(675,285,80,40);
+        btn_help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frm_main, "Berikut ialah cara bermain");
+            }
+        });
+        frm_main.add(btn_help);
 
         // Show frame
         frm_main.setLayout(null);

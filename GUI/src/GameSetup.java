@@ -6,6 +6,7 @@ public class GameSetup {
     private JFrame frm_main;
     private String name;
     private String species = "none";
+    private MapGUI map;
 
     public GameSetup() {
         frm_main = new JFrame("Game Setup");
@@ -82,6 +83,7 @@ public class GameSetup {
                 // nutup
                 else {
                     frm_main.dispose();
+                    map = new MapGUI(species, name);
                 }
 
                 // pindah frm_main in game
