@@ -72,9 +72,10 @@ public abstract class Engimon {
     } //c user-defined ctor
     
     public String displayInfo(){
-        String line = "Name\t\t: " + this.Name + "\n" + "Experience\t: "+ this.Exp +"/100\n" + "Level\t\t: " + this.Level + "\n" + "Live\t\t: " + this.Live + "\n" + "Species\t\t: " + this.Species + "\n";
+        String line = "Name\t\t: " + this.Name + "\n" + "Experience\t: "+ this.Exp +"/100\n" + "Level\t\t: " +  this.Level + "\n" + "Live\t\t: " +  this.Live + "\n" + "Species\t\t: " + this.Species + "\n";
         if (Parent.get(0) != "none") {
             line.concat("Parent\t\t: " + Parent.get(0) + " and " + Parent.get(1) + "\n");
+            
         }
         else {
             line.concat("Engimon tidak memiliki Parent\n");
@@ -219,6 +220,7 @@ public abstract class Engimon {
     public String printSkills(){
         String line = new String();
         if (Skills.size()!=0){
+            
             for (int i = 0; i<Skills.size(); i++) {
                 line.concat(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel() + "\nElements: " + Skills.get(i).getElements().get(0));
                 if (!Skills.get(i).getElements().get(1).equals("none")) {

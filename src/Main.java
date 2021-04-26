@@ -6,14 +6,6 @@ import java.util.*;  // Import the Scanner class
 
 public class Main {
 
-    public static int setRandomEngimonLevel(Player p) {
-        //srand(time(0));
-        // return rand() % 30 + 1;
-        //.RandomNumbersInARange randomNumbersInARange = new RandomNumbersInARange();
-        //int number = randomNumbersInARange.getRandomNumber(1, 10);
-        int max = p.getHighestLevel();
-        return max;
-    }
 
     public static void gameover() {
         System.out.println("          _,---.      ,---.               ___         ,----.  ");
@@ -93,6 +85,7 @@ public class Main {
         System.out.println("|status           |view game status       |");
         System.out.println("|dropSkillItem    |membuang skill item    |");
         System.out.println("|dropEngimon      |membuang engimon       |");
+        System.out.println("|exit             |keluar dari permainan  |");
         System.out.println("|help             |view help              |");
         System.out.println("+-----------------------------------------+");
     }
@@ -102,13 +95,14 @@ public class Main {
         Engimon currentActiveEngimon = P.getActiveEngimon();
         System.out.println( "Game Status" );
         System.out.println( "Active Engimon:" );
-        System.out.println(currentActiveEngimon.displayInfo());
+        currentActiveEngimon.displayInfo();
         System.out.println( "Player: " );
         System.out.println( "Koordinat player: (" + P.getPlayerPosition().x + "," + P.getPlayerPosition().y + ")");
         System.out.println( "Engimon List: " );
-        P.InventEngimon.printInventory();
+        P.showPreviewEngimon();
+        System.out.println();
         System.out.println( "Skill Item List: " );
-        P.InventSkill.printInventory();
+        P.showPreviewSkillItem();
         System.out.println();
     }
     
@@ -116,7 +110,7 @@ public class Main {
         if (command.equals("W") || command.equals("w") || command.equals("A") || command.equals("a") || command.equals("S") || command.equals("s") || command.equals("D") || command.equals("d")) {
             return true;
         }
-        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed") || command.equals("changeName") || command.equals("interact") || command.equals("dropEngimon")|| command.equals("dropSkillItem")) {
+        else if (command.equals("change") || command.equals("battle") || command.equals("learn") || command.equals("inventory") || command.equals("help") || command.equals("status") || command.equals("breed") || command.equals("changeName") || command.equals("interact") || command.equals("dropEngimon")|| command.equals("dropSkillItem") || command.equals("exit")) {
             return true;
         }
         else {
@@ -184,19 +178,10 @@ public class Main {
         }
         
         
-        //TEST
-        /*
-        Engimon E2 = new Diglett("SPAWN", startingEngimon, 10, false);
-        P.addEngimon(E2);
-        */
-        
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
         
-        //TEST 
-        //P.InventSkill.addItem(E1.getSkills().get(0), 10);
-
-        System.out.println("HIGHEST LEVELLLLLL"+P.getHighestLevel());
+     
         Engimon A =  new Charmander("Wild1",c1,P.getHighestLevel(),true); wildEng.add(A);
         Engimon B = new Squirtle("Wild2",c2,P.getHighestLevel(),true); wildEng.add(B);
         Engimon C = new Pikachu("Wild3",c3,P.getHighestLevel(),true); wildEng.add(C);
@@ -260,8 +245,8 @@ public class Main {
                 }
             }
             Boolean gone;
-            if (turn % 4 == 0) {
-                for (int i = 0; i < wildEng.size() ; i++) {
+            if (turn % 10 == 0) {
+                for (int i = 0; i < 8 ; i++) {
                     gone = true;
                     for (int j = 0; j < wildEng.size() ; j++) {
                         if (("Wild"+String.valueOf(i+1)).equals(wildEng.get(j).getName())){
@@ -270,14 +255,15 @@ public class Main {
                     }
                     //System.out.println("gone: "+gone.toString());
                     if (gone) {
-                        if (i == 0) wildEng.add(A);
-                        else if (i == 1) wildEng.add(B);
-                        else if (i == 2) wildEng.add(C);
-                        else if (i == 3) wildEng.add(D);
-                        else if (i == 4) wildEng.add(E);
-                        else if (i == 5) wildEng.add(F);
-                        else if (i == 6) wildEng.add(G);
-                        else if (i == 7) wildEng.add(H);
+                        Integer max = P.getHighestLevel();
+                        if (i == 0) {A.setLevel(max); wildEng.add(A);}
+                        else if (i == 1) {B.setLevel(max); wildEng.add(B);}
+                        else if (i == 2) {C.setLevel(max); wildEng.add(C);}
+                        else if (i == 3) {D.setLevel(max); wildEng.add(D);}
+                        else if (i == 4) {E.setLevel(max); wildEng.add(E);}
+                        else if (i == 5) {F.setLevel(max); wildEng.add(F);}
+                        else if (i == 6) {G.setLevel(max); wildEng.add(G);}
+                        else if (i == 7) {H.setLevel(max); wildEng.add(H);}
                     }
                 }
                 M.changePositionIfNecessary(wildEng, P, randEng);
@@ -485,6 +471,9 @@ public class Main {
                     }
                     P.lepasEngimon(name);
                 }
+            }
+            else if(command.equals("exit")){
+                isGameRunning = false;
             }
             turn++;
         }
