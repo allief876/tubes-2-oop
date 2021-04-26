@@ -143,6 +143,8 @@ public class Player {
     public Engimon findEngimon(String name){
         return (InventEngimon.findItem(name));
     }
+    
+    /*
     public boolean isEngimonExist(String name){
         boolean result = false;
         ArrayList<Engimon> temp = InventEngimon.returnItem();
@@ -153,7 +155,8 @@ public class Player {
             }
         }
         return result;
-    }
+    }*/
+    
     public Boolean isInventoryEngimonEmpty(){
         return (InventEngimon.getJumlahInventory() == 0);
     }
@@ -201,6 +204,14 @@ public class Player {
     
     public void lepasSkillItem (String namaSkillItem, int quantity) {
         InventSkill.removeItem(InventSkill.findItem(namaSkillItem), quantity);
+    }
+    public boolean isEngimonExist (String nama){
+        if (InventEngimon.findItem(nama) != null) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     /*int i = getPlayerPosition().x-1;
     int j = getPlayerPosition().y-1;

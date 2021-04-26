@@ -6,12 +6,13 @@ import java.util.*;  // Import the Scanner class
 
 public class Main {
 
-    public static int setRandomEngimonLevel() {
+    public static int setRandomEngimonLevel(Player p) {
         //srand(time(0));
         // return rand() % 30 + 1;
         //.RandomNumbersInARange randomNumbersInARange = new RandomNumbersInARange();
         //int number = randomNumbersInARange.getRandomNumber(1, 10);
-        return 7;
+        int max = p.getHighestLevel();
+        return max;
     }
 
     public static void gameover() {
@@ -133,7 +134,10 @@ public class Main {
     
     public static void main(String[] args) {
         ArrayList<Engimon> wildEng = new ArrayList<Engimon>();
+        Coordinate startingPlayer = new Coordinate(2,2);
+        Player P = new Player(startingPlayer);
         Scanner myObj = new Scanner(System.in);
+
         Coordinate c1 = new Coordinate();
         Coordinate c2 = new Coordinate();
         Coordinate c3 = new Coordinate();
@@ -145,16 +149,8 @@ public class Main {
     
         //Ini Levelnya mau diset gimana awalnya??
         // ctornya Charmander(name, coordinate, level)
-        Engimon A =  new Charmander("Wild1",c1,setRandomEngimonLevel(),true); wildEng.add(A);
-        Engimon B = new Squirtle("Wild2",c2,setRandomEngimonLevel(),true); wildEng.add(B);
-        Engimon C = new Pikachu("Wild3",c3,setRandomEngimonLevel(),true); wildEng.add(C);
-        Engimon D = new Diglett("Wild4",c4,setRandomEngimonLevel(),true); wildEng.add(D);
-        Engimon E = new Glalie("Wild5",c5,setRandomEngimonLevel(),true); wildEng.add(E);
-        Engimon F = new Rotom("Wild6",c6,setRandomEngimonLevel(),true); wildEng.add(F);
-        Engimon G = new Lapras("Wild7",c7,setRandomEngimonLevel(),true); wildEng.add(G);
-        Engimon H = new Wooper("Wild8",c8,setRandomEngimonLevel(),true); wildEng.add(H);
 
-    
+
         displayMain();
     
         System.out.println("Pilih Engimon Starter: ");
@@ -186,28 +182,42 @@ public class Main {
         else {
             E1 = new Glalie(nameStarter, startingEngimon, levelStarting, false);
         }
-        Coordinate startingPlayer = new Coordinate(2,2);
-        Player P = new Player(startingPlayer);
         
-        /*
+        
+        //TEST
         Engimon E2 = new Diglett("SPAWN", startingEngimon, 10, false);
         P.addEngimon(E2);
-        */
+        
         
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
+        
+        //TEST 
+        //P.InventSkill.addItem(E1.getSkills().get(0), 10);
 
-        P.InventSkill.addItem(E1.getSkills().get(0), 10);
+        System.out.println("HIGHEST LEVELLLLLL"+P.getHighestLevel());
+        Engimon A =  new Charmander("Wild1",c1,P.getHighestLevel(),true); wildEng.add(A);
+        Engimon B = new Squirtle("Wild2",c2,P.getHighestLevel(),true); wildEng.add(B);
+        Engimon C = new Pikachu("Wild3",c3,P.getHighestLevel(),true); wildEng.add(C);
+        Engimon D = new Diglett("Wild4",c4,P.getHighestLevel(),true); wildEng.add(D);
+        Engimon E = new Glalie("Wild5",c5,P.getHighestLevel(),true); wildEng.add(E);
+        Engimon F = new Rotom("Wild6",c6,P.getHighestLevel(),true); wildEng.add(F);
+        Engimon G = new Lapras("Wild7",c7,P.getHighestLevel(),true); wildEng.add(G);
+        Engimon H = new Wooper("Wild8",c8,P.getHighestLevel(),true); wildEng.add(H);
+        //System.out.println(P.getHighestLevel());
 
-    
+
         // GAME ASLI (TERMASUK PETA)
         Boolean isGameRunning = true;
         tubes.Map M = new Map("tubes/inputPeta.txt");
         String command;
         String command2;
+        Learn learn;
+        Breed b;
         int turn = 1;
 
-        M.changePositionIfNecessary(wildEng, P);//random posisi wild engimon
+        Random randEng = new Random();
+        M.changePositionIfNecessary(wildEng, P, randEng);//random posisi wild engimon
 
 
         //Scanner input = new Scanner(System.in);
@@ -221,14 +231,15 @@ public class Main {
                 }
             }
             Boolean gone;
-            if (turn % 10 == 0) {
+            if (turn % 4 == 0) {
                 for (int i = 0; i < wildEng.size() ; i++) {
                     gone = true;
                     for (int j = 0; j < wildEng.size() ; j++) {
-                        if (("Wild"+String.valueOf(i+1)).equals(wildEng.get(i).getName())){
+                        if (("Wild"+String.valueOf(i+1)).equals(wildEng.get(j).getName())){
                             gone = false;
                         }
                     }
+                    //System.out.println("gone: "+gone.toString());
                     if (gone) {
                         if (i == 0) wildEng.add(A);
                         else if (i == 1) wildEng.add(B);
@@ -240,7 +251,7 @@ public class Main {
                         else if (i == 7) wildEng.add(H);
                     }
                 }
-                M.changePositionIfNecessary(wildEng, P);
+                M.changePositionIfNecessary(wildEng, P, randEng);
             }
             M.fillMap(wildEng,P);
             M.printMap();
@@ -329,7 +340,7 @@ public class Main {
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
                 if (!(P.findEngimon(command).getName().equals("none") )){
-                    Learn learn = new Learn(P,P.findEngimon(command));
+                    learn = new Learn(P,P.findEngimon(command));
                 }
             }
             else if (command.equals("breed")){
@@ -343,7 +354,7 @@ public class Main {
            
                 if ((P.findEngimon(engimon1).getElements().get(1).equals("none")) && (P.findEngimon(engimon2).getElements().get(1).equals("none"))){
                     if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
-                        Breed b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
+                        b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
                     }
                 }
                 else{
@@ -365,6 +376,11 @@ public class Main {
                 String name = myObj.nextLine();
                 System.out.print("Masukkan nama baru engimon: ");
                 String namaBaru = myObj.nextLine();
+                while (P.isEngimonExist(namaBaru)){
+                    System.out.print("Nama engimon sudah ada di inventory,");
+                    System.out.println(" masukkan nama baru engimon: ");
+                    namaBaru = myObj.nextLine();
+                }
                 P.changeNameEngimon(name, namaBaru);
 
             }

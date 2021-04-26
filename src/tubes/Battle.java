@@ -171,7 +171,12 @@ public class Battle {
 
             Scanner myObj = new Scanner(System.in);
             System.out.print("Masukkan Nama untuk "+ enemySpecies +" baru anda: ");
-            String nameStarter = myObj.nextLine();
+            String nameStarter = myObj.nextLine(); //input
+            while (player.isEngimonExist(nameStarter)){
+                System.out.println("Sudah terdapat engimon dengan nama " + nameStarter + "!");
+                System.out.print("Masukkan Nama untuk "+ enemySpecies +" baru anda: ");
+                nameStarter = myObj.nextLine();
+            }
             int levelEnemy = enemyEngimon.getLevel();
           
             if (enemySpecies.equals("Charmander")){E1 = new Charmander(nameStarter, loc, levelEnemy, false); }

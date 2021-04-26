@@ -32,6 +32,12 @@ public class Breed {
             Scanner input = new Scanner(System.in);  // Create a Scanner object
             System.out.println("Masukkan nama engimon baru: ");
             String name = input.nextLine();  // Read user input
+
+            while (this.player.isEngimonExist(name)){
+                System.out.println("Nama engimon sudah ada! ");
+                System.out.println("Masukkan nama engimon baru: ");
+                name = input.nextLine();  // Read user input
+            }
             
             ArrayList<String> elements1 =  new ArrayList<String>(eng1.getElements());
             ArrayList<String> elements2 =  new ArrayList<String>(eng2.getElements());
