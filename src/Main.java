@@ -95,7 +95,7 @@ public class Main {
         Engimon currentActiveEngimon = P.getActiveEngimon();
         System.out.println( "Game Status" );
         System.out.println( "Active Engimon:" );
-        currentActiveEngimon.displayInfo();
+        System.out.println(currentActiveEngimon.displayInfo());
         System.out.println( "Player: " );
         System.out.println( "Koordinat player: (" + P.getPlayerPosition().x + "," + P.getPlayerPosition().y + ")");
         System.out.println( "Engimon List: " );
