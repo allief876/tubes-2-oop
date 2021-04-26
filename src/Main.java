@@ -191,12 +191,13 @@ public class Main {
         
         /*
         Engimon E2 = new Diglett("SPAWN", startingEngimon, 10, false);
-        P.addEngimon(E2);*/
-        
+        P.addEngimon(E2);
+        */
         
         P.addEngimon(E1);
         P.setActiveEngimon(E1);
-        //P.InventSkill.addItem(E1.getSkills().get(0), 1);
+
+        P.InventSkill.addItem(E1.getSkills().get(0), 10);
 
     
         // GAME ASLI (TERMASUK PETA)
@@ -371,7 +372,8 @@ public class Main {
                 System.out.println("Pilih skill item yang ingin dibuang: ");
                 P.InventSkill.printInventory();
                 String name = myObj.nextLine();
-                while (P.InventSkill.findItem(name).equals(null)){
+
+                while (P.InventSkill.findItem(name)==(null)){
                     System.out.println("Skill item tidak ada di inventory, masukkan kembali");
                     System.out.println("Skill item yang ingin dibuang: ");
                     name = myObj.nextLine();
@@ -388,11 +390,14 @@ public class Main {
             else if (command.equals("dropEngimon")) {
                 if (P.InventEngimon.returnItem().size() == 1){
                     System.out.println("Hanya tersisa active engimon");
+                    System.out.println();
                 }
                 else {
                     System.out.println("Pilih engimon yang ingin dilepas: ");
                     P.InventEngimon.printInventory();
                     String name = myObj.nextLine();
+
+                    //System.out.println(P.getActiveEngimon().getName());
                     while(P.InventEngimon.findItem(name)==(null) || name.equals(P.getActiveEngimon().getName())){
                         if (name.equals(P.getActiveEngimon().getName())){
                             System.out.println("Tidak bisa melepas active engimon, masukkan kembali");
