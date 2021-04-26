@@ -5,12 +5,18 @@ import java.awt.*;
 public class GameSetup {
     private JFrame frame;
     private String name;
-    private String species;
+    private String species = "none";
 
     public GameSetup() {
         frame = new JFrame("Game Setup");
         frame.setSize(800,600);
         frame.setResizable(false);
+
+        // add images
+        JLabel charm = new JLabel(new ImageIcon("assets\\charmander.png"));
+        charm.setBounds(79,100,100,101);
+        frame.add(charm);
+
 
         // Add radiobutton
         JRadioButton charmander, squirtle, pikachu, diglett, glalie;
@@ -63,8 +69,20 @@ public class GameSetup {
                 // set name
                 name = text.getText();
 
+                // kalo species kosong
+                if (species.equals("none")) {
+                    JOptionPane.showMessageDialog(frame, "Please fill Engimon species", "Alert", JOptionPane.WARNING_MESSAGE);
+                }
+
+                // kalo name kosong
+                else if (name.length() == 0 || name.equals("Insert name for Engimon")) {
+                    JOptionPane.showMessageDialog(frame, "Please insert Engimon name", "Alert", JOptionPane.WARNING_MESSAGE);
+                }
+
                 // nutup
-                frame.dispose();
+                else {
+                    frame.dispose();
+                }
 
                 // pindah frame in game
             }
