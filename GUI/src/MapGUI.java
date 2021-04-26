@@ -71,7 +71,7 @@ public class MapGUI  {
         btn_btl.setBounds(675,135,80,40);
         btn_btl.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new BattleGUI();
+                new BattleGUI(P,P.getActiveEngimon(),P.isEngimonNearby(wildEng));
             }
         });
         frm_main.add(btn_btl);

@@ -379,27 +379,6 @@ public class Main {
                 }
             }
             else if (command.equals("breed")){
-<<<<<<< HEAD
-                String engimon1, engimon2;
-                P.showListEngimon();
-                System.out.println( "Masukkan engimon parent 1: ");
-                engimon1 = myObj.nextLine();
-                System.out.println( "Masukkan engimon parent 2: ");
-                engimon2 = myObj.nextLine();
-
-           
-                if ((P.findEngimon(engimon1).getElements().get(1).equals("none")) && (P.findEngimon(engimon2).getElements().get(1).equals("none"))){
-                    if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
-                        b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
-                    }
-                }
-                else{
-                    System.out.println(" Breeding Gagal ");
-                    System.out.println(" Salah satu parent memiliki 2 element");
-                }
-                
-
-=======
                 if (P.InventEngimon.getJumlahInventory()>1){
                     String engimon1, engimon2;
                     P.showListEngimon();
@@ -441,7 +420,6 @@ public class Main {
                     System.out.println("Breed gagal Engimon anda kurang!!");
                 }
                 
->>>>>>> ff024dd6cba1027bf45029777dcbd19980676701
             }
             else if (command.equals("status")) {
                 displayGameStatus(P);

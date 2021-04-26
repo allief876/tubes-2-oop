@@ -7,7 +7,11 @@ public class BattleGUI {
     private Engimon activeEngimon;
     private Engimon enemyEngimon;
 
-    public BattleGUI() {
+    public BattleGUI(Player _P, Engimon _activeEngimon, Engimon _enemyEngimon) {
+        this.P = _P;
+        this.activeEngimon = _activeEngimon;
+        this.enemyEngimon = _enemyEngimon;
+
         // Setup JFrame
         battleFrame = new JFrame("Battle");
         battleFrame.setSize(600, 450);
@@ -35,7 +39,10 @@ public class BattleGUI {
                 label.setSize(250,100);
                 Battle B = new Battle(P,activeEngimon,enemyEngimon);
                 if (B.getLoseStatus()) {
-                    label.setText("Engimon telah mati");
+                    label.setText("Engimon kehilangan satu nyawa");
+                }
+                else {
+                    label.setText("Engimon menang!");
                 }
             }
         });
