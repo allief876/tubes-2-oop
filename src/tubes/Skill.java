@@ -44,6 +44,7 @@ public class Skill {
         }
         System.out.println("Base Power\t: " + this.BasePower);
         System.out.println("Mastery Level\t: " + this.MasteryLevel);
+        System.out.println();
     }
 
     public Boolean isElementSama(String _element) {

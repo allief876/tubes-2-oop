@@ -8,7 +8,7 @@ public class Lapras extends Engimon{
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Water"); element.add("Ice");
         //Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Frozen");
+        Skill newSkill = new Skill(element,88,1,"Frozen");
         this.incSkills(newSkill);
     }
 }

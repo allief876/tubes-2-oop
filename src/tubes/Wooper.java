@@ -8,7 +8,7 @@ public class Wooper extends Engimon {
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Water"); element.add("Ground");
         //Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Crystalize");
+        Skill newSkill = new Skill(element,80,1,"Crystalize");
         this.incSkills(newSkill);
     }
 }

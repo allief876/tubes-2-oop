@@ -20,9 +20,7 @@ public class Breed {
         
         //Print detail kedua engimon
         eng1.displayInfo();
-        System.out.println();
         eng2.displayInfo();
-        System.out.println();
 
         // Cek requirement breeding
         if (eng1.getLevel() < 4 || eng2.getLevel() < 4){
@@ -34,7 +32,7 @@ public class Breed {
             String name = input.nextLine();  // Read user input
 
             while (this.player.isEngimonExist(name)){
-                System.out.println("Nama engimon sudah ada! ");
+                System.out.println("Nama engimon sudah ");
                 System.out.println("Masukkan nama engimon baru: ");
                 name = input.nextLine();  // Read user input
             }
@@ -44,15 +42,15 @@ public class Breed {
             //elements1 = eng1.getElements();
             //elements1 = eng2.getElements();
             String SpeciesInherited = "";
-            System.out.println(elements1);
-            System.out.println(elements2);
+            //System.out.println(elements1);
+            //System.out.println(elements2);
 
 
             double mastery1 = getAdValuesBreed(eng1,eng2);
             double mastery2 = getAdValuesBreed(eng2,eng1);
             System.out.println("After advalues ");
-            System.out.println(mastery1);
-            System.out.println(mastery2);
+            //System.out.println(mastery1);
+            //System.out.println(mastery2);
 
             // Inherit Elemen dan Species
             if ((eng1.getElements().get(0))==(eng2.getElements().get(0))){
@@ -60,7 +58,7 @@ public class Breed {
                 //Spesies anak dipilih dari parent A atau parent B secara bebas (boleh random atau aturan spesifik tertentu)
                 // bisa dirandom sementara ambil species engimon pertama
                 SpeciesInherited = eng1.getSpecies();
-                System.out.println("element parent equal ");
+                //System.out.println("element parent equal ");
             }
             else{
                 // anak akan memiliki elemen dan spesies dari elemen yang memiliki element advantage yang lebih tinggi.
@@ -71,50 +69,50 @@ public class Breed {
                 else{
                     SpeciesInherited = eng2.getSpecies();
                 }
-                System.out.println("element parent not equal ");
+                //System.out.println("element parent not equal ");
             }
-            System.out.println("Species turunan");
-            System.out.println(SpeciesInherited);
+            //System.out.println("Species turunan");
+            //System.out.println(SpeciesInherited);
 
             if (SpeciesInherited.equals("Charmander")){
                 this.NewEng = new Charmander(name,defaultCoordinate,1,false);
-                System.out.println("Charmander masuk");
+                //System.out.println("Charmander masuk");
                 
             }
             else if (SpeciesInherited.equals("Squirtle")){
                 this.NewEng = new Squirtle(name,defaultCoordinate,1,false);
-                System.out.println("Squirtle masuk");
+                //System.out.println("Squirtle masuk");
             }
             else if (SpeciesInherited.equals("Pikachu")){
                 this.NewEng = new Pikachu(name,defaultCoordinate,1,false);
-                System.out.println("Pikachu masuk");
+                //System.out.println("Pikachu masuk");
             }
             else if (SpeciesInherited.equals("Diglett")){
                 this.NewEng = new Diglett(name,defaultCoordinate,1,false);
-                System.out.println("Diglett masuk");
+                //System.out.println("Diglett masuk");
             }
             else if (SpeciesInherited.equals("Glalie")){
                 this.NewEng = new Glalie(name,defaultCoordinate,1,false);
-                System.out.println("glalie masuk");
+                //System.out.println("glalie masuk");
             }
             else{
                 if (elements1.get(0).equals("Fire")&& elements2.get(0).equals("Electric")){
                         this.NewEng = new Rotom(name,defaultCoordinate,1,false);
-                        System.out.println("rotom masuk");
+                        //System.out.println("rotom masuk");
                     }
                     else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ice")){
                         this.NewEng = new Lapras(name,defaultCoordinate,1,false);
-                        System.out.println("lapras masuk");
+                        //System.out.println("lapras masuk");
                     }
                     else if (elements1.get(0).equals("Water") && elements2.get(0).equals("Ground")){
                         this.NewEng = new Wooper(name,defaultCoordinate,1,false);
-                        System.out.println("wooper masuk");
+                        //System.out.println("wooper masuk");
                     }
                     else{
-                        System.out.println("dual element breeding");
+                        //System.out.println("dual element breeding");
                     }
             }
-            this.NewEng.displayInfo();
+            //this.NewEng.displayInfo();
             
 
             //Inherit skills
@@ -137,8 +135,8 @@ public class Breed {
                     SkillsCompatible2.add(Skills2.get(i));
                 }
             }
-            System.out.println(SkillsCompatible1);
-            System.out.println(SkillsCompatible2);
+            //System.out.println(SkillsCompatible1);
+            //System.out.println(SkillsCompatible2);
 
             
             //Skill Pskill1 = new Skill();
@@ -151,10 +149,10 @@ public class Breed {
             while ((SkillsCompatible1.size()!=0)||(SkillsCompatible2.size()!=0)){
             //while (x<=1){
              
-                System.out.println("Size SkillsCompatible 1:");
-                System.out.println(SkillsCompatible1.size());
-                System.out.println("Size SkillsCompatible 2:");
-                System.out.println(SkillsCompatible2.size());
+                //System.out.println("Size SkillsCompatible 1:");
+                //System.out.println(SkillsCompatible1.size());
+                //System.out.println("Size SkillsCompatible 2:");
+                //System.out.println(SkillsCompatible2.size());
                 if (SkillsCompatible1.size()!=0){
                     
                     this.CalonSkill1 = new Skill(SkillsCompatible1.get(0).getElements(), SkillsCompatible1.get(0).getBasePower(), SkillsCompatible1.get(0).getMasteryLevel(), SkillsCompatible1.get(0).getNama());
@@ -188,10 +186,10 @@ public class Breed {
                     }
 
                 }
-                System.out.println("Calon Skill 1:");
-                System.out.println(this.CalonSkill1);
-                System.out.println("Calon Skill 2:");
-                System.out.println(this.CalonSkill2);
+                //System.out.println("Calon Skill 1:");
+                //System.out.println(this.CalonSkill1);
+                //System.out.println("Calon Skill 2:");
+                //System.out.println(this.CalonSkill2);
 
                 if ((CalonSkill1!=null)&&(CalonSkill2!=null)){
                         // Masukan skill pilihan ke arraylist skillinherited

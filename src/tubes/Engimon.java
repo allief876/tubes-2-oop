@@ -71,7 +71,6 @@ public abstract class Engimon {
         this.Position.setCoordinate(spawn.x,spawn.y);
     } //c user-defined ctor
     
-    
     public void displayInfo(){
         System.out.println("Name\t\t: " + this.Name);
         System.out.println("Experience\t: "+this.Exp+"/100");
@@ -190,7 +189,6 @@ public abstract class Engimon {
     
     public void setLevel(Integer _level) {
         this.Level = _level;
-        if (_level > LevelTertinggiEngimonNonWild) setLevelTertinggiEngimonNonWild(_level);;
     }
 
     protected static void setLevelTertinggiEngimonNonWild(Integer _level) {

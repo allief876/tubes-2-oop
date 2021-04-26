@@ -12,7 +12,7 @@ public class Player {
 
     public Inventory<Engimon> InventEngimon;
     public Inventory<Skill> InventSkill;
-    private int maxCapacity = 5;
+    private int maxCapacity = 20;
 
     //Player();
     public Player(Coordinate coor){
@@ -59,9 +59,18 @@ public class Player {
     */
     public void showListSkillItem() {
         //InventSkill.printInventory();
-        ArrayList<Skill> temp = InventSkill.returnItem();
+        ArrayList<Skill> temp = sortBasePower(InventSkill.returnItem());
         for (int i = 0 ; i<temp.size() ; i++) {
+            System.out.println("Amount\t: "+InventSkill.getAmount(temp.get(i)));
             temp.get(i).printDetail();
+        }
+    }
+    public void showPreviewSkillItem() {
+        //InventSkill.printInventory();
+        ArrayList<Skill> temp = sortBasePower(InventSkill.returnItem());
+        for (int i = 0 ; i<temp.size() ; i++) {
+            System.out.print(InventSkill.getAmount(temp.get(i))+"x ");
+            System.out.println(temp.get(i).getNama());
         }
     }
     public boolean CheckSkillCompatible(Engimon eng, String namaskill) {
@@ -83,10 +92,133 @@ public class Player {
         }
         return (true1 || true2);
     }
+    public ArrayList<Skill> sortBasePower(ArrayList<Skill> input){
+        ArrayList <Skill> result = new ArrayList<Skill>();
+        ArrayList <Integer> basePower = new ArrayList<Integer>();
+        for (int i = 0 ; i<input.size() ; i++){
+            basePower.add(input.get(i).getBasePower());
+        }
+        Collections.sort(basePower, Collections.reverseOrder());
 
+        while (basePower.size() != 0) {
+            for (int j = 0 ; j < input.size() ; j++ ) {
+                if(basePower.get(0) == (input.get(j)).getBasePower()) {
+                    result.add(input.get(j));
+                    input.remove(j);
+                    basePower.remove(0);
+                }
+            }
+        }
+        return result;
+    }
+    /*public ArrayList<Skill> sortInventorySkillItem(){
+        ArrayList <Skill> temp = sortBasePower(InventSkill.returnItem());
+
+    }*/
+    
+    public ArrayList<Engimon> sortLevel (ArrayList<Engimon> input){
+        ArrayList <Engimon> result = new ArrayList<Engimon>();
+        ArrayList <Integer> level = new ArrayList<Integer>();
+        for (int i = 0 ; i<input.size() ; i++){
+            level.add(input.get(i).getLevel());
+        }
+        Collections.sort(level, Collections.reverseOrder());
+
+        while (level.size() != 0) {
+            for (int j = 0 ; j < input.size() ; j++ ) {
+                if(level.get(0) == input.get(j).getLevel()) {
+                    result.add(input.get(j));
+                    input.remove(j);
+                    level.remove(0);
+                }
+            }
+        }
+        return result;
+    }
+    public ArrayList<Engimon> sortInventory(){
+        ArrayList <Engimon> temp = InventEngimon.returnItem();
+        ArrayList <Engimon> result = new ArrayList<Engimon>();
+        ArrayList <Engimon> fire = new ArrayList<Engimon>();
+        ArrayList <Engimon> water = new ArrayList<Engimon>();
+        ArrayList <Engimon> electric = new ArrayList<Engimon>();
+        ArrayList <Engimon> ground = new ArrayList<Engimon>();
+        ArrayList <Engimon> ice= new ArrayList<Engimon>();
+        ArrayList <Engimon> fireElectric= new ArrayList<Engimon>();
+        ArrayList <Engimon> waterIce = new ArrayList<Engimon>();
+        ArrayList <Engimon> waterGround = new ArrayList<Engimon>();
+        for (int i = 0 ; i<temp.size() ; i++){
+            if ((((temp.get(i)).getElements()).get(0)).equals("Fire")) {
+                //fire electric
+                if (((temp.get(i).getElements()).get(1)).equals("Electric")){
+                    fireElectric.add(temp.get(i));
+                }
+                //fire
+                else {
+                    fire.add(temp.get(i));
+                }
+            }
+            else if ((((temp.get(i)).getElements()).get(0)).equals("Water")) {
+                //water ice
+                if (((temp.get(i).getElements()).get(1)).equals("Ice")){
+                    waterIce.add(temp.get(i));
+                }
+                //water ground
+                else if(((temp.get(i).getElements()).get(1)).equals("Ground")){
+                    waterGround.add(temp.get(i));
+                }
+                //water
+                else {
+                    water.add(temp.get(i));
+                }
+            }
+            else if ((((temp.get(i)).getElements()).get(0)).equals("Electric")) {
+                //electric
+                electric.add(temp.get(i));
+            }
+            else if ((((temp.get(i)).getElements()).get(0)).equals("Ground")) {
+                //ground
+                ground.add(temp.get(i));
+            }
+            else if ((((temp.get(i)).getElements()).get(0)).equals("Ice")) {
+                // ice
+                ice.add(temp.get(i));
+            }   
+        }
+        fireElectric = sortLevel(fireElectric);
+        waterIce = sortLevel(waterIce);
+        waterGround = sortLevel(waterGround);
+        fire = sortLevel(fire);
+        water = sortLevel(water);
+        electric = sortLevel(electric);
+        ground = sortLevel(ground);
+        ice = sortLevel(ice);
+        result.addAll(fire);
+        result.addAll(water);
+        result.addAll(electric);
+        result.addAll(ground);
+        result.addAll(ice);
+        result.addAll(fireElectric);
+        result.addAll(waterIce);
+        result.addAll(waterGround);
+        return result;
+    }
+    public void showPreviewEngimon() {
+        ArrayList<Engimon> temp = sortInventory();
+        for (int i = 0 ; i<temp.size() ; i++) {
+            System.out.print(temp.get(i).getName()+" / ");
+            System.out.print(temp.get(i).getElements().get(0));
+            if (!temp.get(i).getElements().get(1).equals("none")) {
+                System.out.print(" and " + temp.get(i).getElements().get(1)+ " / ");
+            }
+            else {
+                System.out.print(" / ");
+            }
+            System.out.println("Lv."+temp.get(i).getLevel());
+        }
+    }
     public void showListEngimon() {
         //InventEngimon.printInventory();
-        ArrayList<Engimon> temp = InventEngimon.returnItem();
+        ArrayList<Engimon> temp = sortInventory();
         for (int i = 0 ; i<temp.size() ; i++) {
             System.out.println("Nama\t: "+temp.get(i).getName());
             System.out.println("Level\t: "+temp.get(i).getLevel());
@@ -112,8 +244,8 @@ public class Player {
         }
     }
 
-    public void showDataEngimon(Engimon _engimon){}//Ini bukan displayInfo() di Engimon???
-    public void showDataSkillItem(Skill _skill){}
+    //public void showDataEngimon(Engimon _engimon){}//Ini bukan displayInfo() di Engimon???
+    //public void showDataSkillItem(Skill _skill){}
 
     public void deleteEngimon(Engimon eng){
         InventEngimon.removeItem(eng, 1);

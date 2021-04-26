@@ -8,7 +8,7 @@ public class Rotom extends Engimon{
         ArrayList<String> element =  new ArrayList<String>();
         element.add("Fire"); element.add("Electric");
         //Elements.addAll(element);
-        Skill newSkill = new Skill(element,75,1,"Overloaded");
+        Skill newSkill = new Skill(element,85,1,"Overloaded");
         this.incSkills(newSkill);
     }
 }
