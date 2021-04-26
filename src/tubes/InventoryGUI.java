@@ -1,13 +1,14 @@
 package tubes;
 
-import javasx.swing.*;
+import java.util.*;
+import javax.swing.*;
 import java.awt.*;
 
 public class InventoryGUI {
     
     private JFrame frm_main;
 
-    public InventoryGUI() {
+    public InventoryGUI(Player P) {
 
         frm_main = new JFrame("Pemilihan Inventory");
         frm_main.setSize(400,300);
@@ -24,14 +25,6 @@ public class InventoryGUI {
         JButton btn_skill = new JButton("Skill");
         btn_skill.setBounds(50,270,40,50);
         frm_main.add(btn_skill);
-        
-        System.out.println( "Ketik \"engimon\" atau \"skill\"" );
-        command = myObj.nextLine();
-        if (command.equals("engimon")) {
-            P.showListEngimon();
-        }
-        else if (command.equals("skill")){
-            P.showListSkillItem();
-        }
+
     }
 }

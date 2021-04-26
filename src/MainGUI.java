@@ -1,7 +1,7 @@
-package tubes;
-
+import java.util.*;
 import javax.swing.*;
 import java.awt.event.*; 
+import tubes.*;
 
 public class MainGUI {
 
@@ -14,12 +14,12 @@ public class MainGUI {
         frm_main.setResizable(false); // Kalo diresize, nanti keliatan jelek-jeleknya
 
         // Add Title Image
-        JLabel lbl_title = new JLabel(new ImageIcon("assets\\WillyWkwkwk.png"));
+        JLabel lbl_title = new JLabel(new ImageIcon("tubes\\assets\\WillyWkwkwk.png"));
         lbl_title.setBounds(79,100,642,121);
         frm_main.add(lbl_title);
 
         // New Game
-        JButton btn_newgame = new JButton("New Game");
+        JButton btn_newgame = new JButton(new ImageIcon("tubes\\assets\\New Game.png"));
         btn_newgame.setBounds(300,280,200,50);
         frm_main.add(btn_newgame);
         btn_newgame.addActionListener(new ActionListener() {

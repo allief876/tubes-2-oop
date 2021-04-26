@@ -12,8 +12,8 @@ public class DropSkillGUI {
     public DropSkillGUI(Player P) {
 
         // Set font
-        Font ftitle = new Font(Font.Monospace, Font.PLAIN, 16);
-        Font fbtn = new Font(Font.Monospace, Font.PLAIN, 12);
+        Font ftitle = new Font("Consolas", Font.PLAIN, 16);
+        Font fbtn = new Font("Consolas", Font.PLAIN, 12);
         
         frm_main = new JFrame("Drop Skill");
         frm_main.setSize(400,300);
@@ -24,8 +24,14 @@ public class DropSkillGUI {
         title.setBounds(50, 50, 100, 30);
         title.setFont(ftitle);
 
+        // Add Arraylist
+        ArrayList<String> skills = new ArrayList<String>();
+        for (Skill skill : P.InventSkill.returnItem()) {
+            skills.add(skill.getNama());
+        }
+        
         // Add combobox
-        JComboBox selectSkill = new JComboBox(P.InventSkill.returnItem().toArray());
+        JComboBox selectSkill = new JComboBox(skills.toArray());
         selectSkill.setBounds(50, 100, 100, 30);
         selectSkill.setFont(fbtn);
 
@@ -48,12 +54,12 @@ public class DropSkillGUI {
         selected.setBounds(50, 150, 50, 30);
         selected.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = selectSkill.getItemAt(selectSkill.getSelectedIndex());  
-                int count = P.InventSkill.findItem(name).getAmount();
+                String name = selectSkill.getItemAt(selectSkill.getSelectedIndex()).toString();  
+                int count = P.InventSkill.getAmount(P.InventSkill.findItem(name));
 
                 // Kondisi amount input > count
                 if (((Integer) spinner.getValue()) > count) {
-                    label.setText("Skill amount exceeded. Please decrease")
+                    label.setText("Skill amount exceeded. Please decrease");
                 }
 
                 else {
@@ -61,7 +67,7 @@ public class DropSkillGUI {
                     frm_main.dispose();
                 }
             }
-        })
+        });
         selected.setFont(fbtn);
 
         // Add to frame

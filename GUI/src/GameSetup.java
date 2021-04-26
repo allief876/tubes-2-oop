@@ -83,7 +83,7 @@ public class GameSetup {
                 // nutup
                 else {
                     frm_main.dispose();
-                    map = new MapGUI(species, name);
+                    //map = new MapGUI(species, name, Peta, P, wildEng);
                 }
 
                 // pindah frm_main in game

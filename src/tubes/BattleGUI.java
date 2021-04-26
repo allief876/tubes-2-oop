@@ -1,6 +1,8 @@
 package tubes;
 
+import java.util.*;
 import javax.swing.*;
+import java.awt.event.*;
 import java.awt.*;
 
 public class BattleGUI {
@@ -17,7 +19,7 @@ public class BattleGUI {
         // Setup JFrame
         battleFrame = new JFrame("Battle");
         battleFrame.setSize(600, 450);
-        battleFrame.setResizable(false);
+        battleFrame.setResizable(true);
 
         // Display Active and Enemy Engimon Info
         String activeEngimonInfoString = makeInfo(activeEngimon);
@@ -29,7 +31,7 @@ public class BattleGUI {
 
         // Button battle and cancel
         JButton battleButton = new JButton("Battle");
-        JBUtton cancelButton = new JBUtton("Cancel");
+        JButton cancelButton = new JButton("Cancel");
         battleButton.setBounds(500,200,100,50);
         cancelButton.setBounds(500,350,200,50);
         battleFrame.add(battleButton);
@@ -41,10 +43,11 @@ public class BattleGUI {
                 label.setSize(250,100);
                 Battle B = new Battle(P,activeEngimon,enemyEngimon);
                 if (B.getLoseStatus()) {
-                    label.setText("Engimon kehilangan satu nyawa");
+                    JOptionPane.showMessageDialog(battleFrame, "Engimon kehilangan satu nyawa!");
+            
                 }
                 else {
-                    label.setText("Engimon menang!");
+                    JOptionPane.showMessageDialog(battleFrame, "Engimon menang!");
                 }
             }
         });
@@ -64,12 +67,12 @@ public class BattleGUI {
         String level = "Level\t\t:" + E.getLevel() + "\n";
         String live = "Live\t\t:" + E.getLive() + "\n";
         String species = "Species\t\t:" + E.getSpecies() + "\n";
-        String skills = formattedPrintSkills(E.getSkills());
+        String skills = formattedPrintSkills(E.getSkills(), E);
         return nama+exp+level+live+species+skills;
     }
 
-    private String formattedPrintSkills(ArrayList<Skill> arraySkill) {
-        for (int i = 0; i < E.getSkills().size; i++) {
+    private String formattedPrintSkills(ArrayList<Skill> arraySkill, Engimon E) {
+        for (int i = 0; i < (E.getSkills()).size(); i++) {
             String skill = Integer.toString(i+1) + ". " + arraySkill.get(i).getNama() + ", Mastery level = " + arraySkill.get(i).getMasteryLevel();
             String element1 = "Elements: " + arraySkill.get(i).getElements().get(0);
             String skillString1 = skill.concat(element1);
@@ -81,5 +84,6 @@ public class BattleGUI {
                 return skillString1.concat("\n");
             }
         }
+        return ("");
     }
 }

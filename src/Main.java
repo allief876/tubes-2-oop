@@ -102,7 +102,7 @@ public class Main {
         Engimon currentActiveEngimon = P.getActiveEngimon();
         System.out.println( "Game Status" );
         System.out.println( "Active Engimon:" );
-        currentActiveEngimon.displayInfo();
+        System.out.println(currentActiveEngimon.displayInfo());
         System.out.println( "Player: " );
         System.out.println( "Koordinat player: (" + P.getPlayerPosition().x + "," + P.getPlayerPosition().y + ")");
         System.out.println( "Engimon List: " );
@@ -185,9 +185,10 @@ public class Main {
         
         
         //TEST
+        /*
         Engimon E2 = new Diglett("SPAWN", startingEngimon, 10, false);
         P.addEngimon(E2);
-        
+        */
         
         P.addEngimon(E1);
         P.setActiveEngimon(E1);

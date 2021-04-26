@@ -1,6 +1,9 @@
+package tubes;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.*;
 
 public class GameSetup {
     private JFrame frm_main;
@@ -83,7 +86,11 @@ public class GameSetup {
                 // nutup
                 else {
                     frm_main.dispose();
+                    // Definisikan semua paramater tersisa
+
+
                     map = new MapGUI(species, name);
+                    //String species, String name, Map Peta, Player P, ArrayList<Engimon> wildEng
                 }
 
                 // pindah frm_main in game

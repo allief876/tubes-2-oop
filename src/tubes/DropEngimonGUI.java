@@ -12,8 +12,8 @@ public class DropEngimonGUI {
     public DropEngimonGUI(Player P) {
 
         // Set font
-        Font ftitle = new Font(Font.Monospace, Font.PLAIN, 16);
-        Font fbtn = new Font(Font.Monospace, Font.PLAIN, 12);
+        Font ftitle = new Font("Consolas", Font.PLAIN, 16);
+        Font fbtn = new Font("Consolas", Font.PLAIN, 12);
         
         frm_main = new JFrame("Drop Engimon");
         frm_main.setSize(400,300);
@@ -44,7 +44,7 @@ public class DropEngimonGUI {
                 P.lepasEngimon(P.InventEngimon.returnItem().get(id).getName());
                 frm_main.dispose();
             }
-        })
+        });
         selected.setFont(fbtn);
 
         // Add to frame

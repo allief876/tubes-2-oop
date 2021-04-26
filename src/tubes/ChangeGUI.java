@@ -12,8 +12,8 @@ public class ChangeGUI {
     public ChangeGUI(Player P) {
 
         // Set font
-        Font ftitle = new Font(Font.Monospace, Font.PLAIN, 16);
-        Font fbtn = new Font(Font.Monospace, Font.PLAIN, 12);
+        Font ftitle = new Font("Consolas", Font.PLAIN, 16);
+        Font fbtn = new Font("Consolas", Font.PLAIN, 12);
         
         frm_main = new JFrame("Change Active Engimon");
         frm_main.setSize(400,300);
@@ -41,10 +41,10 @@ public class ChangeGUI {
         selected.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int id = selectEngimon.getSelectedIndex();
-                P.setActiveEngimon(P.InventEngimon.returnItem.get(id)); // MASIH BLM YAKIN
+                P.setActiveEngimon((P.InventEngimon.returnItem()).get(id)); 
                 frm_main.dispose();
             }
-        })
+        });
         selected.setFont(fbtn);
 
         // Add to frame

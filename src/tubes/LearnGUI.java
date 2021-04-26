@@ -1,7 +1,9 @@
 package tubes;
 
+import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 public class LearnGUI {
 
@@ -11,8 +13,8 @@ public class LearnGUI {
     protected Player player;
 
     public LearnGUI(Player P, Engimon eng1) {
-        this.player = P;
-        this.targetEngimon = eng1;
+        player = P;
+        targetEngimon = eng1;
 
         // Set up frm utama
         frm_main = new JFrame("Learn New Skill");
@@ -21,9 +23,9 @@ public class LearnGUI {
 
         // Add title
         JLabel lbl_title = new JLabel("Train your Engimon!");
-        title.setBounds(50, 50, 100, 50);
+        lbl_title.setBounds(50, 50, 100, 50);
 
-        if ((eng1.getSkills().size()==4) && (this.player.InventSkill.getJumlahInventory()!=0)){
+        if ((eng1.getSkills().size()==4) && (player.InventSkill.getJumlahInventory()!=0)){
             
             // Notif penuh
             JLabel lbl_subtitle = new JLabel("Skill Engimon Anda penuh!");
@@ -33,7 +35,7 @@ public class LearnGUI {
             // Tombol balik
             JButton btn_balik = new JButton("Kembali ke permainan");
             btn_balik.setBounds(50,170,100,50);
-            btn_int.addActionListener(new ActionListener() {
+            btn_balik.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frm_main.dispose();
                 }
@@ -66,23 +68,23 @@ public class LearnGUI {
             btn_add.setBounds(20,290,80,50);
             btn_add.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    name = btn_add.getText();
-                    if (this.player.CheckSkillCompatible(eng1,name)) {
+                    String name = btn_add.getText();
+                    if (player.CheckSkillCompatible(eng1,name)) {
                         // add skill pada engimon)
                         //System.out.println("INIIIIII:"+this.player.InventSkill.findItem(name));
-                        this.targetSkill = this.player.InventSkill.findItem(name);
-                        this.targetEngimon.incSkills(this.targetSkill);
+                        targetSkill = player.InventSkill.findItem(name);
+                        targetEngimon.incSkills(targetSkill);
 
-                        if (!this.player.InventSkill.findItem(name).equals(null)) {
+                        if (!player.InventSkill.findItem(name).equals(null)) {
                             //System.out.println("Skill teremove");
-                            this.player.InventSkill.removeItem(this.player.InventSkill.findItem(name), 1);
+                            player.InventSkill.removeItem(player.InventSkill.findItem(name), 1);
 
                             //update inventory engimon
                             // remove engimon dengan skill lama
-                            this.player.InventEngimon.removeItem(this.player.InventEngimon.findItem(this.targetEngimon.getName()), 1);
+                            player.InventEngimon.removeItem(player.InventEngimon.findItem(targetEngimon.getName()), 1);
                             
                             // add engimon dgn skill baru
-                            this.player.InventEngimon.addItem(this.targetEngimon, 1);
+                            player.InventEngimon.addItem(targetEngimon, 1);
                         } else {
                             UIManager.put("OptionPane.messageFont", new Font("Consolas", Font.PLAIN, 14));
                             UIManager.put("OptionPane.buttonFont", new Font("Consolas", Font.PLAIN, 12));
@@ -111,14 +113,15 @@ public class LearnGUI {
             // Tombol balik
             JButton btn_balik = new JButton("Kembali ke permainan");
             btn_balik.setBounds(50,170,100,50);
-            btn_int.addActionListener(new ActionListener() {
+            btn_balik.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frm_main.dispose();
                 }
-        }
+            });
 
         // Show frame
         frm_main.setLayout(null);
         frm_main.setVisible(true);
+        }
     }
 }

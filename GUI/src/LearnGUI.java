@@ -109,7 +109,7 @@ public class LearnGUI {
             // Tombol balik
             JButton btn_balik = new JButton("Kembali ke permainan");
             btn_balik.setBounds(50,170,100,50);
-            btn_int.addActionListener(new ActionListener() {
+            btn_balik.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frm_main.dispose();
                 }
