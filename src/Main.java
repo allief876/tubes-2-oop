@@ -238,6 +238,10 @@ public class Main {
                 for (int i = 0; i < wildEng.size(); i++) {
                     M.setNewRandomPosition(wildEng.get(i),P, rand);
                 }
+                //tiap 4 turn level wild tambah +1
+                for (int i = 0; i<wildEng.size(); i++){
+                    wildEng.get(i).setLevel(wildEng.get(i).getLevel()+1);
+                }
             }
             Boolean gone;
             if (turn % 10 == 0) {
