@@ -16,7 +16,6 @@ public class Skill {
     }
 
     @Override
-    //Ini buat tampilin data yang muncul saat printInventory()
     public String toString(){
         return (this.getNama());
     }
