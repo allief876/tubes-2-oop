@@ -71,26 +71,22 @@ public abstract class Engimon {
         this.Position.setCoordinate(spawn.x,spawn.y);
     } //c user-defined ctor
     
-    public void displayInfo(){
-        System.out.println("Name\t\t: " + this.Name);
-        System.out.println("Experience\t: "+this.Exp+"/100");
-        System.out.println("Level\t\t: "+ this.Level);
-        System.out.println("Live\t\t: "+ this.Live);
-        System.out.println("Species\t\t: " + this.Species);
+    public String displayInfo(){
+        String line = "Name\t\t: " + this.Name + "\n" + "Experience\t: "+ (String) this.Exp +"/100\n" + "Level\t\t: " + (String) this.Level + "\n" + "Live\t\t: " + (String) this.Live + "\n" + "Species\t\t: " + this.Species + "\n";
         if (Parent.get(0) != "none") {
-            System.out.println("Parent\t\t: " + Parent.get(0) + " and " + Parent.get(1));
+            line.concat("Parent\t\t: " + Parent.get(0) + " and " + Parent.get(1) + "\n");
         }
         else {
-            System.out.println("Engimon tidak memiliki Parent");
+            line.concat("Engimon tidak memiliki Parent\n");
         }
-        System.out.println("Skills\t\t: ");
-        printSkills();
-        System.out.println();        
+        line.concat("Skills\t\t:\n" + printSkills);
+        //System.out.println();        
         /**System.out.print("Elements\t: " + Elements.get(0));
         if (!this.Elements.get(1).equals("none")) {
             System.out.println(" and " + Elements.get(1));
         }*/
-        System.out.println(); 
+        //System.out.println(); 
+        return line;
     } // tampilin semua data engimon
     
     @Override
@@ -221,16 +217,15 @@ public abstract class Engimon {
         }
     }
     
-    public void printSkills(){
+    public String printSkills(){
         if (Skills.size()!=0){
+            String line = new String();
             for (int i = 0; i<Skills.size(); i++) {
-                System.out.println(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel());
-                System.out.print("Elements: " + Skills.get(i).getElements().get(0));
-                
+                line.concat(i+1 + ". " + Skills.get(i).getNama() + ", Mastery level = " + Skills.get(i).getMasteryLevel() + "\nElements: " + Skills.get(i).getElements().get(0));
                 if (!Skills.get(i).getElements().get(1).equals("none")) {
-                    System.out.println(" and " + Skills.get(i).getElements().get(1));
+                    line.concat(" and " + Skills.get(i).getElements().get(1));
                 }
-                System.out.println();
+                line.concat("\n");
             }
         } 
     } 

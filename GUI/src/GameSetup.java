@@ -93,6 +93,5 @@ public class GameSetup {
         frm_main.setLayout(null);
         frm_main.setVisible(true);
     }
-
     
 }
