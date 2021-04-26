@@ -12,7 +12,7 @@ public abstract class Engimon {
     protected Integer Level;                        // level engimon, default = 0
     protected Integer Exp;                          // exp engimon, default = 0
     protected Integer CumExp;                       // cumulative exp sebelom mati, default = 0
-    protected static final Integer MaxExp = 10000;  // max exp sampai mati
+    protected static final Integer MaxExp = 1000;  // max exp sampai mati
     protected String Slogan;                        // text yang dikirim engimon saat berinteraksi
     protected Integer Live;
     protected Boolean isWildEngimon;
@@ -94,7 +94,6 @@ public abstract class Engimon {
     } // tampilin semua data engimon
     
     @Override
-    //Ini buat tampilin data yang muncul saat printInventory()
     public String toString(){
         return this.getName();
         //return ("Nama: "+ this.getName() + 

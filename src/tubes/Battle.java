@@ -11,7 +11,7 @@ public class Battle {
     protected Player player;
     protected boolean loseStatus;
     protected boolean tolakBattle = false;
-    protected static int winExp = 50;
+    protected static int winExp = 75;
 
     public Battle(Player _player, Engimon eng1, Engimon eng2){
         this.player = _player;
@@ -202,16 +202,16 @@ public class Battle {
         
         activeEngimon.setCumExp(activeEngimon.getCumExp() + winExp);
         if (activeEngimon.getExp() > 100){
-            activeEngimon.setExp(activeEngimon.getCumExp()-100);
+            activeEngimon.setExp(activeEngimon.getExp()-100);
             activeEngimon.setLevel(activeEngimon.getLevel()+1);
             System.out.println("Level Up!");
         }
-        if (activeEngimon.getCumExp() >= 10000){
-            System.out.println("Engimon  mencapai Exp maximum, Engimon dihapus dari Inventory");
-            player.deleteEngimon(activeEngimon);
+        // /if (activeEngimon.getCumExp() >= 1000){
+        //     System.out.println("Engimon  mencapai Exp maximum, Engimon dihapus dari Inventory");
+        //     player.deleteEngimon(activeEngimon);
 
-            //harus minta active engimon baru gak?
-        }
+        //     //harus minta active engimon baru gak?
+        // }
     }
 
     public void lose(){

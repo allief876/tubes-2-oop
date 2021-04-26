@@ -155,7 +155,7 @@ public class Main {
         
         //Atribut Ctor starting engimon
         Coordinate startingEngimon = new Coordinate(2,1);
-        int levelStarting = 15; // Level engimon aktif awal
+        int levelStarting = 1; // Level engimon aktif awal
         Engimon E1; // Active engimon awal
     
         String starterSpecies = myObj.nextLine();
@@ -234,11 +234,35 @@ public class Main {
         Random rand = new Random();
         while (isGameRunning) {
             // Siapin dan print map
+            if(P.getActiveEngimon().getLevel()>10){
+                if (P.InventEngimon.getJumlahInventory()==1){
+                    System.out.println("Inventory anda kosong, game over");
+                    isGameRunning = false;
+                }
+                else{
+                    // delete engimon from inventory
+                    P.InventEngimon.removeItem(P.InventEngimon.findItem(P.getActiveEngimon().getName()),1);
+                    P.showListEngimon();
+                    System.out.println("Engimon active anda mencapai level maksimum dan dihapus, silahkan pilih active engimon baru");
+                    System.out.println( "Masukkan engimon: ");
+                    command = myObj.nextLine();
+                    while (!P.isEngimonExist(command)){
+                        System.out.print("Nama engimon tidak ada di inventory,");
+                        System.out.println(" masukkan engimon yang sesuai: ");
+                        P.showListEngimon();
+                        System.out.println( "Masukkan engimon: ");
+                        command = myObj.nextLine();
+                    }
+                    P.setActiveEngimon(P.InventEngimon.findItem(command.toString()));
+                }
+            }
             if (turn % 4 == 0) {
                 for (int i = 0; i < wildEng.size(); i++) {
                     M.setNewRandomPosition(wildEng.get(i),P, rand);
                 }
-                //tiap 4 turn level wild tambah +1
+                
+            }
+            if (turn % 12 == 0) {
                 for (int i = 0; i<wildEng.size(); i++){
                     wildEng.get(i).setLevel(wildEng.get(i).getLevel()+1);
                 }
@@ -309,6 +333,13 @@ public class Main {
                 P.showListEngimon();
                 System.out.println( "Masukkan engimon: ");
                 command = myObj.nextLine();
+                while (!P.isEngimonExist(command)){
+                    System.out.print("Nama engimon tidak ada di inventory,");
+                    P.showListEngimon();
+                    System.out.println("Masukkan engimon yang sesuai: ");
+                    System.out.println( "Masukkan engimon: ");
+                    command = myObj.nextLine();
+                }
                 P.setActiveEngimon(P.InventEngimon.findItem(command.toString()));
             }
             else if (command.equals("battle")) {
@@ -358,30 +389,47 @@ public class Main {
                 }
             }
             else if (command.equals("breed")){
-                String engimon1, engimon2;
-                P.showListEngimon();
-                System.out.println("Masukkan engimon parent 1: ");
-                engimon1 = myObj.nextLine();
-                System.out.println("Masukkan engimon parent 2: ");
-                engimon2 = myObj.nextLine();
-                System.out.println();
+                if (P.InventEngimon.getJumlahInventory()>1){
+                    String engimon1, engimon2;
+                    P.showListEngimon();
+                    System.out.println("Masukkan engimon parent 1: ");
+                    engimon1 = myObj.nextLine();
+                    System.out.println("Masukkan engimon parent 2: ");
+                    engimon2 = myObj.nextLine();
+                    System.out.println();
 
-                if (engimon1.equals(engimon2)){
-                    System.out.println("Breeding Gagal!! ");
-                    System.out.println("engimon anda ngebreed dengan diri sendiri!!!");
-                }
-                else{
-                    if ((P.findEngimon(engimon1).getElements().get(1).equals("none")) && (P.findEngimon(engimon2).getElements().get(1).equals("none"))){
-                        if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
-                            b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
-                        }
+                    while (!P.isEngimonExist(engimon1) || !P.isEngimonExist(engimon2)){
+                        System.out.print("Nama engimon tidak ada di inventory,");
+                        System.out.println(" masukkan engimon yang sesuai: ");
+                        P.showListEngimon();
+                        System.out.println("Masukkan engimon parent 1: ");
+                        engimon1 = myObj.nextLine();
+                        System.out.println("Masukkan engimon parent 2: ");
+                        engimon2 = myObj.nextLine();
+                        System.out.println();
+                    }
+
+                    if (engimon1.equals(engimon2)){
+                        System.out.println("Breeding Gagal!! ");
+                        System.out.println("engimon anda ngebreed dengan diri sendiri!!!");
                     }
                     else{
-                        System.out.println(" Breeding Gagal!! ");
-                        System.out.println(" Salah satu parent memiliki 2 element");
+                        if ((P.findEngimon(engimon1).getElements().get(1).equals("none")) && (P.findEngimon(engimon2).getElements().get(1).equals("none"))){
+                            if (!(P.findEngimon(engimon1).getName().equals("none") && P.findEngimon(engimon2).getName().equals("none"))){
+                                b = new Breed(P, P.findEngimon(engimon1), P.findEngimon(engimon2));
+                            }
+                        }
+                        else{
+                            System.out.println(" Breeding Gagal!! ");
+                            System.out.println(" Salah satu parent memiliki 2 element");
+                        }
                     }
+                    System.out.println();
                 }
-                System.out.println();
+                else{
+                    System.out.println("Breed gagal Engimon anda kurang!!");
+                }
+                
             }
             else if (command.equals("status")) {
                 displayGameStatus(P);
