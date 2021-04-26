@@ -3,19 +3,19 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class GameSetup {
-    private JFrame frame;
+    private JFrame frm_main;
     private String name;
     private String species = "none";
 
     public GameSetup() {
-        frame = new JFrame("Game Setup");
-        frame.setSize(800,600);
-        frame.setResizable(false);
+        frm_main = new JFrame("Game Setup");
+        frm_main.setSize(800,600);
+        frm_main.setResizable(false);
 
         // add images
         JLabel charm = new JLabel(new ImageIcon("assets\\charmander.png"));
         charm.setBounds(79,100,100,101);
-        frame.add(charm);
+        frm_main.add(charm);
 
 
         // Add radiobutton
@@ -41,22 +41,22 @@ public class GameSetup {
         bg.add(diglett);
         bg.add(glalie);
 
-        // Add radiobutton to frame
-        frame.add(charmander);
-        frame.add(squirtle);
-        frame.add(pikachu);
-        frame.add(diglett);
-        frame.add(glalie);
+        // Add radiobutton to frm_main
+        frm_main.add(charmander);
+        frm_main.add(squirtle);
+        frm_main.add(pikachu);
+        frm_main.add(diglett);
+        frm_main.add(glalie);
 
         // Add text field
         JTextField text = new JTextField("Insert name for Engimon");
         text.setBounds(270, 450, 200, 30);
-        frame.add(text);
+        frm_main.add(text);
 
         // Add submit button
         JButton submit = new JButton("Submit");
         submit.setBounds(320, 500, 80, 30);
-        frame.add(submit);
+        frm_main.add(submit);
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // set species
@@ -71,25 +71,25 @@ public class GameSetup {
 
                 // kalo species kosong
                 if (species.equals("none")) {
-                    JOptionPane.showMessageDialog(frame, "Please fill Engimon species", "Alert", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(frm_main, "Please fill Engimon species", "Alert", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // kalo name kosong
                 else if (name.length() == 0 || name.equals("Insert name for Engimon")) {
-                    JOptionPane.showMessageDialog(frame, "Please insert Engimon name", "Alert", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(frm_main, "Please insert Engimon name", "Alert", JOptionPane.WARNING_MESSAGE);
                 }
 
                 // nutup
                 else {
-                    frame.dispose();
+                    frm_main.dispose();
                 }
 
-                // pindah frame in game
+                // pindah frm_main in game
             }
         });
 
-        frame.setLayout(null);
-        frame.setVisible(true);
+        frm_main.setLayout(null);
+        frm_main.setVisible(true);
     }
 
     
